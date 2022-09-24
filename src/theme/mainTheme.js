@@ -1,3 +1,5 @@
+import { createGlobalStyle } from "styled-components";
+
 export const theme = {
   primary: "#F2F2F2",
   secondary: "#FE6C2D",
@@ -8,9 +10,10 @@ export const theme = {
   fontWeight: {
     light: 300,
     regular: 400,
-    semibold: 500,
-    bold: 600,
+    medium: 500,
+    semibold: 600,
   },
+  transitionBase: "all 0.3s ease",
 };
 
 export const sizes = {
@@ -38,3 +41,41 @@ export const device = {
   normalDesktop: `(min-width: ${sizes.xxxxxl})`,
   ultraDesktop: `(min-width: ${sizes.xxxxxxl})`,
 };
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    width: 100%;
+    max-width: calc(1920px - (2*24px));
+    padding: 0 24px;
+  }
+
+  .mono-font {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .fw-regular {
+    font-weight: ${theme.fontWeight.regular}
+  }
+
+  .fw-medium {
+    font-weight: ${theme.fontWeight.medium}
+  }
+
+  .fw-semibold {
+    font-weight: ${theme.fontWeight.semibold}
+  }
+
+  a {
+    color: ${theme.black};
+    text-decoration: none;
+    transition: ${theme.transitionBase};
+
+    &:hover {
+      color: ${theme.black};
+    }
+  }
+`;
