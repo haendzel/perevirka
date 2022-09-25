@@ -4,7 +4,7 @@ import RoundedBordered from "../../RoundedBordered/RoundedBordered";
 
 const MenuListItem = ({ index, children, active, item }) => {
   return (
-    <StyledMenuListItem active={active ? "is-active" : null} item={item}>
+    <StyledMenuListItem className={active ? "is-active" : null} item={item}>
       <div className="d-flex justify-start align-items-center">
         <RoundedBordered type="ml-0">
           {index >= 10 ? index : "0" + index}

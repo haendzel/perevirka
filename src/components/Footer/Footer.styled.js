@@ -1,7 +1,7 @@
 import { theme } from "../../theme/mainTheme";
 import styled from "styled-components";
 
-export const StyledFooter = styled.header`
+export const StyledFooter = styled.footer`
   display: block;
   font-size: 14px;
   min-height: 35px;

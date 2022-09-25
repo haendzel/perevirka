@@ -2,31 +2,47 @@ import React, { useEffect, useState } from "react";
 import MenuListItem from "./MenuListItem/MenuListItem";
 import { StyledMenuList } from "./MenuList.styled";
 
-const MenuList = () => {
-  let objectItems = {};
-  let nodesArray = [];
-  const [nodes, setNodes] = useState(null);
+const MenuList = (activeNode) => {
+  const [nodes, setNodes] = useState([]);
+  const [thisNode, setThisNode] = useState({});
+
+  const fetchData = () => {
+    fetch("miserables.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setNodes(data.nodes);
+      });
+  };
+
+  const checkIndex = (index) => {
+    console.log(activeNode.index);
+    if (index === thisNode.index) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   useEffect(() => {
-    fetch("miserables.json")
-      .then((res) => res.json())
-      .then((data) => {
-        objectItems = data;
-        nodesArray = objectItems.nodes;
-        setNodes(nodesArray);
-        console.log(nodesArray);
-      });
-  }, []);
+    fetchData();
+    setThisNode(activeNode);
+    console.log("menu list:", thisNode);
+  }, [thisNode]);
 
   return (
     <StyledMenuList>
-      {nodesArray.map(function (node, index) {
-        return (
-          <MenuListItem index={index + 1} key={index + 1}>
-            {node.id}
-          </MenuListItem>
-        );
-      })}
+      {nodes.map((node, index) => (
+        <MenuListItem
+          active={checkIndex(index)}
+          index={index + 1}
+          key={index + 1}
+        >
+          {node.id}
+        </MenuListItem>
+      ))}
     </StyledMenuList>
   );
 };

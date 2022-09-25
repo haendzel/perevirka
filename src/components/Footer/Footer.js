@@ -2,9 +2,9 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { StyledFooter } from "./Footer.styled";
 
-const Header = () => {
+const Footer = () => {
   return (
-    <StyledFooter className="header">
+    <StyledFooter className="footer">
       <Container className="w-100">
         <div className="d-flex justify-content-center align-items-center">
           <a href="#" className="mono-font mb-0">
@@ -16,4 +16,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Footer;
