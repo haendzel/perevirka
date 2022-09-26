@@ -3,7 +3,7 @@ import SpriteText from "three-spritetext";
 import { ForceGraph3D } from "react-force-graph";
 import axios from "axios";
 
-const FocusGraph = () => {
+const FocusGraph = ({ handleClick }) => {
   const fgRef = useRef();
   const [activeNode, setActiveNode] = useState(null);
 

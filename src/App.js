@@ -15,15 +15,8 @@ const root = createRoot(container);
 
 const { useRef, useCallback } = React;
 
-function App() {
-  let activeItem = "";
+function App({ handleClick }) {
   const [activeNode, setActiveNode] = useState(null);
-  const [thisNode, setThisNode] = useState(null);
-
-  useEffect(() => {
-    setThisNode(activeNode);
-    console.log(thisNode);
-  }, [activeNode]);
 
   useEffect(() => {
     fetch("miserables.json")
@@ -76,7 +69,10 @@ function App() {
             <Header />
             <StyledSideFrame left={true} right={false} />
             <FocusGraph />
-            <SideMenu activeNode={thisNode} />
+            <SideMenu
+              activeNode={activeNode}
+              handleClick={() => handleClick()}
+            />
             <StyledSideFrame right={true} left={false} />
             <Footer />
           </>,

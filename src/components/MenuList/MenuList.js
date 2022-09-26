@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MenuListItem from "./MenuListItem/MenuListItem";
 import { StyledMenuList } from "./MenuList.styled";
 
-const MenuList = (activeNode) => {
+const MenuList = ({ activeNode, handleClick }) => {
   const [nodes, setNodes] = useState([]);
   const [thisNode, setThisNode] = useState({});
 
@@ -18,11 +18,12 @@ const MenuList = (activeNode) => {
   };
 
   const checkIndex = (index) => {
-    console.log(activeNode.index);
-    if (index === thisNode.index) {
-      return true;
-    } else {
-      return false;
+    if (activeNode !== null) {
+      if (index === activeNode.index) {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 
@@ -39,6 +40,7 @@ const MenuList = (activeNode) => {
           active={checkIndex(index)}
           index={index + 1}
           key={index + 1}
+          onClick={() => handleClick()}
         >
           {node.id}
         </MenuListItem>
