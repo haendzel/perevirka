@@ -78,4 +78,40 @@ export const GlobalStyle = createGlobalStyle`
       color: ${theme.black};
     }
   }
+
+  .tags {
+    .tag {
+      margin: 0 0 0 6px !important;
+
+      &:hover {
+        background-color: ${theme.gray};
+        border-color: ${theme.gray};
+      }
+    }
+  }
+
+  h3 {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+  }
+
+  .scene-container {
+    background-color: black;
+    margin-left: -15%;
+  }
+
+  .article {
+    &-block {
+      padding: 8px;
+      border-bottom: 1px solid ${theme.black};
+      font-size: 14px;
+
+      p {
+        line-height: 20px;
+        font-weight: 400;
+        margin: 0;
+      }
+    }
+  }
 `;

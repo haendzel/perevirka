@@ -49,7 +49,7 @@ function App({ handleClick }) {
           return (
             <ForceGraph3D
               ref={fgRef}
-              width={window.innerWidth - 250}
+              width={window.innerWidth}
               graphData={data}
               nodeAutoColorBy="group"
               onNodeClick={handleClick}

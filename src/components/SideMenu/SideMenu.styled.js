@@ -2,10 +2,11 @@ import { theme } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledSideMenu = styled.div`
-  display: block;
+  display: flex;
+  flex-direction: row;
   border: none;
   width: auto;
-  height: 100%;
+  height: calc(100% - 40px);
   width: auto;
   position: absolute;
   right: 24px;

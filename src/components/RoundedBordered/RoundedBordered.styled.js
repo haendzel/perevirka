@@ -10,5 +10,7 @@ export const StyledRoundedBordered = styled.a`
   font-size: 13px;
   border-radius: 30px;
   font-weight: 500;
+  min-width: 40px;
+  text-align: center;
   cursor: pointer;
 `;

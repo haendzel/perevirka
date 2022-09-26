@@ -3,7 +3,7 @@ import SpriteText from "three-spritetext";
 import { ForceGraph3D } from "react-force-graph";
 import axios from "axios";
 
-const FocusGraph = ({ handleClick }) => {
+const FocusGraph = () => {
   const fgRef = useRef();
   const [activeNode, setActiveNode] = useState(null);
 
@@ -33,7 +33,7 @@ const FocusGraph = ({ handleClick }) => {
     <ForceGraph3D
       //width={window.innerWidth - 250}
       ref={fgRef}
-      width={window.innerWidth - 250}
+      width={window.innerWidth - 700}
       //graphData={nodes}
       jsonUrl="./miserables.json"
       nodeAutoColorBy="group"
