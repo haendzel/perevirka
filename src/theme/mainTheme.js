@@ -6,6 +6,7 @@ export const theme = {
   black: "#000010",
   bg: "#F2F2F2",
   gray: "#E0E0E0",
+  darkgray: "#D9D9D9",
   white: "#ffffff",
   fontWeight: {
     light: 300,
@@ -45,11 +46,13 @@ export const device = {
 export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
+    background-color: #000011;
+    -webkit-font-smoothing: antialiased;
   }
 
   .container {
     width: 100%;
-    max-width: calc(1920px - (2*24px));
+    max-width: 100%;
     padding: 0 24px;
   }
 
@@ -84,8 +87,8 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 0 0 6px !important;
 
       &:hover {
-        background-color: ${theme.gray};
-        border-color: ${theme.gray};
+        background-color: ${theme.darkgray};
+        border-color: ${theme.darkgray};
       }
     }
   }
@@ -112,6 +115,48 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         margin: 0;
       }
+
+      &.image-block {
+        padding-bottom: 0;
+      }
+
+      blockquote {
+        font-size: 16px;
+        font-family: 'Inter', sans-serif;
+        color: ${theme.secondary};
+        font-style: italic;
+      }
+
+      .author-text {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      figure {
+        margin-bottom: 0;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      figcaption {
+        margin-top: 0;
+        padding: 8px 0;
+        font-size: 12px;
+        font-weight: 500;
+      }
     }
+  }
+
+  .brand {
+    a {
+      padding-right: 16px;
+    }
+  }
+
+  .graph-info-msg {
+    font-family: 'Inter', sans-serif !important;
   }
 `;

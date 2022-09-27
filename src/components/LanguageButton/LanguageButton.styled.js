@@ -13,7 +13,7 @@ export const StyledLanguageButton = styled.button`
   box-shadow: none;
   border: none;
   cursor: pointer;
-  margin: 0 0 0 6px;
+  margin: 0;
   transition: all 0.2s ease-in;
 
   &.is-active {
@@ -22,8 +22,8 @@ export const StyledLanguageButton = styled.button`
   }
 
   &:hover {
-    border: 1px solid ${theme.gray};
-    background-color: ${theme.gray};
+    border: 1px solid ${theme.darkgray};
+    background-color: ${theme.darkgray};
     transition: all 0.2s ease-in;
   }
 `;

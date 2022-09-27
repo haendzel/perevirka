@@ -35,7 +35,7 @@ const MenuList = ({ activeNode, handleClick }) => {
 
   return (
     <StyledMenuList>
-      <MenuListItem active={true} index="i " key={0}>
+      <MenuListItem active={checkIndex(0) ? false : true} index="i " key={0}>
         Info
       </MenuListItem>
       {nodes.map((node, index) => (

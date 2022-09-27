@@ -43,7 +43,7 @@ function App() {
       <ForceGraph3D
         //width={window.innerWidth - 250}
         ref={fgRef}
-        width={window.innerWidth - 250}
+        width={window.innerWidth}
         //graphData={nodes}
         jsonUrl="./miserables.json"
         nodeAutoColorBy="group"
@@ -51,6 +51,7 @@ function App() {
         nodeThreeObject={(node) => {
           const sprite = new SpriteText(node.id);
           sprite.color = node.color;
+          sprite.fontFace = "Inter";
           sprite.textHeight = 6;
           return sprite;
         }}
