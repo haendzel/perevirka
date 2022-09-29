@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/perevirka/static/css/main.6cc0fc89.css",
+    "main.js": "/perevirka/static/js/main.910f32d6.js",
+    "static/media/open.jpg": "/perevirka/static/media/open.a06c3133e5e313a476c9.jpg",
+    "index.html": "/perevirka/index.html",
+    "main.6cc0fc89.css.map": "/perevirka/static/css/main.6cc0fc89.css.map",
+    "main.910f32d6.js.map": "/perevirka/static/js/main.910f32d6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6cc0fc89.css",
+    "static/js/main.910f32d6.js"
+  ]
+}
