@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const StyledDetailsTab = styled.div`
   width: 100%;
-  background-color: transparent;
   border-bottom: 1px solid ${theme.black};
   height: auto;
   min-height: 40px;
@@ -14,8 +13,14 @@ export const StyledDetailsTab = styled.div`
   align-items: center;
   font-size: 14px;
   flex: 1;
+  background-color: ${theme.light} !important;
+  z-index: 100;
 
   p {
     margin: 0;
   }
+`;
+
+export const StyledDetailsTabs = styled.div`
+  min-height: 200px;
 `;

@@ -6,22 +6,26 @@ import MenuList from "../MenuList/MenuList";
 import { StyledSideMenu } from "./SideMenu.styled";
 import DetailsTab from "../DetailsTab/DetailsTab";
 import { StyledDetailsTabs } from "../DetailsTabs/DetailsTabs.styled";
+import { ReactComponent as SocialIcon } from "../../assets/icons/arrow-up.svg";
 
-const SideMenu = ({ activeNode, handleClick }) => {
-  const [thisNode, setThisNode] = useState({});
+const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
+  const [menuNode, setMenuNode] = useState(null);
 
   useEffect(() => {
-    setThisNode(activeNode);
-    console.log("side menu: ", thisNode);
-  }, [activeNode]);
+    changeMenuNode(menuNode);
+  }, [menuNode]);
 
   return (
     <StyledSideMenu>
-      <MenuList handleClick={() => handleClick()} activeNode={thisNode} />
+      <MenuList
+        activeNode={activeNode}
+        changeNode={(menuNode) => setMenuNode(menuNode)}
+        handleClick={handleClick}
+      />
       <DetailsWrapper>
-        <DetailsTags />
+        {/* <DetailsTags /> */}
         <DetailsArticle />
-        <StyledDetailsTabs>
+        {/* <StyledDetailsTabs>
           <DetailsTab>
             <p>Size</p>
             <p>Aprox 43 active members</p>
@@ -33,28 +37,60 @@ const SideMenu = ({ activeNode, handleClick }) => {
           <DetailsTab>
             <p>Location/s</p>
             <div className="locations">
-              <span className="d-inline-block text-underline me-1">Warsaw</span>
-              <span className="d-inline-block text-underline me-1">Warsaw</span>
-              <span className="d-inline-block text-underline me-1">Warsaw</span>
+              <a
+                href="#"
+                className="d-inline-block social-link text-underline me-1"
+              >
+                Warsaw
+              </a>
+              <a
+                href="#"
+                className="d-inline-block social-link text-underline me-1"
+              >
+                Krakow
+              </a>
+              <a
+                href="#"
+                className="d-inline-block social-link text-underline me-1"
+              >
+                Lviv
+              </a>
             </div>
           </DetailsTab>
           <DetailsTab>
             <p>URL</p>
-            <div className="locations">
-              <span className="d-inline-block text-underline me-1">
+            <div className="socials">
+              <a
+                target="_blank"
+                href="https://discord.com/"
+                className="d-inline-block social-link text-underline me-1"
+              >
                 Discord
-              </span>
-              <span className="d-inline-block text-underline me-1">WWW</span>
-              <span className="d-inline-block text-underline me-1">
+                <SocialIcon className="mb-1" />
+              </a>
+              <a
+                target="_blank"
+                href="https://example.com/"
+                className="d-inline-block social-link text-underline me-1"
+              >
+                WWW
+                <SocialIcon className="mb-1" />
+              </a>
+              <a
+                target="_blank"
+                href="https://instagram.com/"
+                className="d-inline-block social-link text-underline me-1"
+              >
                 Instagram
-              </span>
+                <SocialIcon className="mb-1" />
+              </a>
             </div>
           </DetailsTab>
           <DetailsTab>
             <p>Founded date</p>
             <p>Autumn 2021</p>
           </DetailsTab>
-        </StyledDetailsTabs>
+        </StyledDetailsTabs> */}
       </DetailsWrapper>
     </StyledSideMenu>
   );

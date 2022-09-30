@@ -14,4 +14,17 @@ export const StyledSideMenu = styled.div`
   z-index: 997;
   border-left: 1px solid ${theme.black};
   background-color: ${theme.primary};
+
+  .social-link {
+    &:hover {
+      color: ${theme.secondary};
+
+      svg {
+        path {
+          fill: ${theme.secondary};
+          cursor: pointer;
+        }
+      }
+    }
+  }
 `;

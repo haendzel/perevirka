@@ -72,6 +72,11 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: ${theme.fontWeight.semibold}
   }
 
+  .text-underline {
+    text-decoration: underline;
+    padding: 0 4px;
+  }
+
   a {
     color: ${theme.black};
     text-decoration: none;
@@ -158,5 +163,9 @@ export const GlobalStyle = createGlobalStyle`
 
   .graph-info-msg {
     font-family: 'Inter', sans-serif !important;
+  }
+
+  .btn {
+    box-shadow: none !important;
   }
 `;

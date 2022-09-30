@@ -16,9 +16,14 @@ export const StyledHeaderLink = styled.button`
   margin: 0 6px;
   transition: all 0.25s ease-in;
 
-  &:hover,
-  &.is-active {
+  &.is-active,
+  &:hover {
     box-shadow: inset 0 0 0 1px ${theme.black};
     transition: all 0.25s ease-in;
+  }
+
+  &:hover {
+    background: ${theme.darkgray};
+    box-shadow: inset 0 0 0 1px ${theme.darkgray};
   }
 `;
