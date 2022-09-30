@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/perevirka/static/css/main.6cc0fc89.css",
-    "main.js": "/perevirka/static/js/main.2b029290.js",
-    "static/media/sample.png": "/perevirka/static/media/sample.394685b022874d476473.png",
-    "index.html": "/perevirka/index.html",
-    "static/media/arrow-up.svg": "/perevirka/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
-    "main.6cc0fc89.css.map": "/perevirka/static/css/main.6cc0fc89.css.map",
-    "main.2b029290.js.map": "/perevirka/static/js/main.2b029290.js.map"
+    "main.css": "/static/css/main.6cc0fc89.css",
+    "main.js": "/static/js/main.1313285e.js",
+    "static/media/sample.png": "/static/media/sample.394685b022874d476473.png",
+    "index.html": "/index.html",
+    "static/media/arrow-up.svg": "/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
+    "main.6cc0fc89.css.map": "/static/css/main.6cc0fc89.css.map",
+    "main.1313285e.js.map": "/static/js/main.1313285e.js.map"
   },
   "entrypoints": [
     "static/css/main.6cc0fc89.css",
-    "static/js/main.2b029290.js"
+    "static/js/main.1313285e.js"
   ]
 }
