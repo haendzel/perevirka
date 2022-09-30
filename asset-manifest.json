@@ -1,14 +1,15 @@
 {
   "files": {
     "main.css": "/perevirka/static/css/main.6cc0fc89.css",
-    "main.js": "/perevirka/static/js/main.910f32d6.js",
-    "static/media/open.jpg": "/perevirka/static/media/open.a06c3133e5e313a476c9.jpg",
+    "main.js": "/perevirka/static/js/main.2b029290.js",
+    "static/media/sample.png": "/perevirka/static/media/sample.394685b022874d476473.png",
     "index.html": "/perevirka/index.html",
+    "static/media/arrow-up.svg": "/perevirka/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
     "main.6cc0fc89.css.map": "/perevirka/static/css/main.6cc0fc89.css.map",
-    "main.910f32d6.js.map": "/perevirka/static/js/main.910f32d6.js.map"
+    "main.2b029290.js.map": "/perevirka/static/js/main.2b029290.js.map"
   },
   "entrypoints": [
     "static/css/main.6cc0fc89.css",
-    "static/js/main.910f32d6.js"
+    "static/js/main.2b029290.js"
   ]
 }
