@@ -11,7 +11,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   const [thisNode, setThisNode] = useState({});
 
   const fetchData = () => {
-    fetch("miserables.json")
+    fetch("https://haendzel.github.io/perevirka/miserables.json")
       .then((response) => {
         return response.json();
       })
@@ -63,7 +63,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
             >
               <div className="d-flex justify-start align-items-center">
                 <RoundedBordered type="ml-0">
-                  {index < 10 && index > 0 ? "0" + index : index}
+                  {index < 10 ? "0" + (index + 1) : index + 1}
                 </RoundedBordered>
                 <span>
                   {nodeStringLength < 16
@@ -88,7 +88,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
           >
             <div className="d-flex justify-start align-items-center">
               <RoundedBordered type="ml-0">
-                {index < 10 || index === 0 ? "0" + index : index}
+                {index < 10 ? "0" + (index + 1) : index + 1}
               </RoundedBordered>
               <span>
                 {nodeStringLength < 16
@@ -117,7 +117,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
       <MenuListItem active={checkIndex(0) ? false : true} index="i " key={0}>
         O projekcie
       </MenuListItem>
-      {nodes.map((node, index) => getOrganization(node, index + 1))}
+      {nodes.map((node, index) => getOrganization(node, index))}
     </StyledMenuList>
   );
 };

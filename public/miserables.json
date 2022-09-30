@@ -697,6 +697,12 @@
       "target": "Nie-nieodpowiedzialni",
       "visible": true,
       "value": 1
+    },
+    {
+      "source": "Medical transport",
+      "target": "Nie-nieodpowiedzialni",
+      "visible": true,
+      "value": 1
     }
   ]
 }
