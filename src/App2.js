@@ -38,8 +38,10 @@ function App() {
           );
         }
       } else {
-        console.log(threeNodes);
-        var items = threeNodes.filter((item) => item.id === "Lambda");
+        let activeNodeFromDOM = document.querySelector(".menu-item.is-active")
+          .dataset.node;
+        console.log(activeNodeFromDOM);
+        var items = threeNodes.filter((item) => item.id === activeNodeFromDOM);
         var item = items[1];
         console.log(item);
         const distance = 70;
@@ -67,7 +69,7 @@ function App() {
       <StyledSideFrame left={true} right={false} />
       <SideMenu
         activeNode={activeNode}
-        changeMenuNode={(menuNode) => setMenuNode(menuNode)}
+        changeMenuNode={(menuNode) => setActiveNode(menuNode)}
         handleClick={handleClick}
       />
       <ForceGraph3D
@@ -82,6 +84,7 @@ function App() {
         backgroundColor="#000"
         linkColor={colorForLinks}
         onNodeClick={handleClick}
+        showNavInfo={false}
         nodeThreeObject={(node) => {
           const sprite = new SpriteText(node.id);
           sprite.color = "#000";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import MenuListItem from "./MenuListItem/MenuListItem";
 import { StyledMenuList } from "./MenuList.styled";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -9,6 +9,7 @@ import RoundedBordered from "../RoundedBordered/RoundedBordered";
 const MenuList = ({ changeNode, activeNode, handleClick }) => {
   const [nodes, setNodes] = useState([]);
   const [thisNode, setThisNode] = useState({});
+  const ref = useRef(null);
 
   const fetchData = () => {
     fetch("https://haendzel.github.io/perevirka/miserables.json")
@@ -31,8 +32,17 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     }
   };
 
-  const callToNodes = (node) => {
+  const callToNodes = (e, node) => {
+    const activeButtons = document.querySelectorAll(".menu-item.is-active");
+
+    activeButtons.forEach((btn) => {
+      btn.classList.remove("is-active");
+    });
+
+    e.target.parentElement.classList.add("is-active");
+
     changeNode(node);
+    setThisNode(node);
     handleClick();
   };
 
@@ -42,6 +52,16 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         {title}
       </Tooltip>
     );
+  };
+
+  const handleFirstButtonClick = (e) => {
+    const activeButtons = document.querySelectorAll(".menu-item.is-active");
+
+    activeButtons.forEach((btn) => {
+      btn.classList.remove("is-active");
+    });
+
+    e.target.parentElement.classList.add("is-active");
   };
 
   const getOrganization = (node, index) => {
@@ -55,15 +75,18 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
             overlay={renderTooltip(null, node.id)}
           >
             <StyledButton
+              className="menu-item"
               active={checkIndex(index)}
               index={index + 1}
+              ref={ref}
+              data-node={node.id}
               key={index + 1}
               title={node.id}
-              onClick={() => callToNodes(node)}
+              onClick={(e) => callToNodes(e, node)}
             >
               <div className="d-flex justify-start align-items-center">
                 <RoundedBordered type="ml-0">
-                  {index < 10 ? "0" + (index + 1) : index + 1}
+                  {index < 9 ? "0" + (index + 1) : index + 1}
                 </RoundedBordered>
                 <span>
                   {nodeStringLength < 16
@@ -80,15 +103,18 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
       } else {
         return (
           <StyledButton
+            className="menu-item"
             active={checkIndex(index)}
             index={index + 1}
+            ref={ref}
             key={index + 1}
+            data-node={node.id}
             title={node.id}
-            onClick={() => callToNodes(node)}
+            onClick={(e) => callToNodes(e, node)}
           >
             <div className="d-flex justify-start align-items-center">
               <RoundedBordered type="ml-0">
-                {index < 10 ? "0" + (index + 1) : index + 1}
+                {index < 9 ? "0" + (index + 1) : index + 1}
               </RoundedBordered>
               <span>
                 {nodeStringLength < 16
@@ -114,9 +140,20 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
 
   return (
     <StyledMenuList>
-      <MenuListItem active={checkIndex(0) ? false : true} index="i " key={0}>
-        O projekcie
-      </MenuListItem>
+      <StyledButton
+        className="menu-item menu-item-info is-active"
+        index={0}
+        ref={ref}
+        key={0}
+        title="O projekcie"
+        data-node="O projekcie"
+        onClick={(e) => handleFirstButtonClick(e)}
+      >
+        <div className="d-flex justify-start align-items-center">
+          <RoundedBordered type="ml-0">i</RoundedBordered>
+          <span>O projekcie</span>
+        </div>
+      </StyledButton>
       {nodes.map((node, index) => getOrganization(node, index))}
     </StyledMenuList>
   );
