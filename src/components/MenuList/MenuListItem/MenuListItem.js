@@ -3,19 +3,19 @@ import { StyledMenuListItem } from "./MenuListItem.styled";
 import RoundedBordered from "../../RoundedBordered/RoundedBordered";
 
 const handleButtonClick = () => {
-  const activeButtons = document.querySelectorAll(".menu-item.is-active");
+  const activeButtons = document.querySelectorAll(".menu-item.active");
 
   activeButtons.forEach((btn) => {
-    btn.classList.remove("is-active");
+    btn.classList.remove("active");
   });
 
-  document.querySelector(".menu-item-info").classList.add("is-active");
+  document.querySelector(".menu-item-info").classList.add("active");
 };
 
 const MenuListItem = forwardRef(({ index, children, active, item }, ref) => (
   <StyledMenuListItem
     menuRef={ref}
-    className={active ? "menu-item menu-item-info is-active" : "menu-item-info"}
+    className={active ? "menu-item menu-item-info active" : "menu-item-info"}
     onClick={() => handleButtonClick()}
     item={item}
   >

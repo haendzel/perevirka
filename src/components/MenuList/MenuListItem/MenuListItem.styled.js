@@ -44,6 +44,11 @@ export const StyledButton = styled(Button)`
   height: 40px;
   padding: 8px;
 
+  span,
+  a {
+    pointer-events: none;
+  }
+
   &:hover {
     background-color: ${theme.darkgray};
     color: ${theme.secondary};
@@ -79,8 +84,10 @@ export const StyledButton = styled(Button)`
     position: relative;
     color: ${theme.black};
 
-    span {
+    span,
+    a {
       color: ${theme.black};
+      pointer-events: none;
     }
     &:after {
       display: block;
@@ -88,6 +95,7 @@ export const StyledButton = styled(Button)`
       position: absolute;
       right: 20px;
       top: 50%;
+      pointer-events: none;
       transform: translateY(-50%);
     }
 

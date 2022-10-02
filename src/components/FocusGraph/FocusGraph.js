@@ -35,7 +35,7 @@ const FocusGraph = () => {
       ref={fgRef}
       width={window.innerWidth - 700}
       //graphData={nodes}
-      jsonUrl="./miserables.json"
+      jsonUrl="https://haendzel.github.io/perevirka/miserables.json"
       nodeAutoColorBy="group"
       onNodeClick={handleClick}
       nodeThreeObject={(node) => {

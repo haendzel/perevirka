@@ -12,7 +12,6 @@ import { ForceGraph3D } from "react-force-graph";
 function App() {
   const fgRef = useRef();
   const [activeNode, setActiveNode] = useState(null);
-  const [menuNode, setMenuNode] = useState(null);
   let threeNodes = [];
 
   const colorForLinks = () => {
@@ -22,6 +21,12 @@ function App() {
   const handleClick = useCallback(
     (node) => {
       if (node?.id) {
+        const activeButtons = document.querySelectorAll(".menu-item.active");
+
+        activeButtons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
         const distance = 70;
         const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
         setActiveNode(node);
@@ -38,24 +43,29 @@ function App() {
           );
         }
       } else {
-        let activeNodeFromDOM = document.querySelector(".menu-item.is-active")
-          .dataset.node;
+        let activeNodeFromDOM =
+          document.querySelector(".menu-item.active").dataset.node;
         console.log(activeNodeFromDOM);
-        var items = threeNodes.filter((item) => item.id === activeNodeFromDOM);
-        var item = items[1];
-        console.log(item);
-        const distance = 70;
-        const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
-        if (fgRef.current) {
-          fgRef.current.cameraPosition(
-            {
-              x: item.x * distRatio,
-              y: item.y * distRatio,
-              z: item.z * distRatio,
-            },
-            item,
-            3000
+        console.log(threeNodes);
+        if (activeNodeFromDOM !== null) {
+          var items = threeNodes.filter(
+            (item) => item.id === activeNodeFromDOM
           );
+          var item = items[0];
+          console.log(item);
+          const distance = 70;
+          const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
+          if (fgRef.current) {
+            fgRef.current.cameraPosition(
+              {
+                x: item.x * distRatio,
+                y: item.y * distRatio,
+                z: item.z * distRatio,
+              },
+              item,
+              3000
+            );
+          }
         }
       }
     },
@@ -79,7 +89,7 @@ function App() {
         forceEngine={"d3"}
         dagLevelDistance={10}
         width={window.innerWidth}
-        jsonUrl="./miserables.json"
+        jsonUrl="https://haendzel.github.io/perevirka/miserables.json"
         nodeAutoColorBy="group"
         backgroundColor="#000"
         linkColor={colorForLinks}

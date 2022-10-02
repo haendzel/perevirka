@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import MenuListItem from "./MenuListItem/MenuListItem";
 import { StyledMenuList } from "./MenuList.styled";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { StyledButton } from "./MenuListItem/MenuListItem.styled";
@@ -33,13 +32,13 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   };
 
   const callToNodes = (e, node) => {
-    const activeButtons = document.querySelectorAll(".menu-item.is-active");
+    const activeButtons = document.querySelectorAll(".menu-item.active");
 
     activeButtons.forEach((btn) => {
-      btn.classList.remove("is-active");
+      btn.classList.remove("active");
     });
 
-    e.target.parentElement.classList.add("is-active");
+    e.target.parentElement.classList.add("active");
 
     changeNode(node);
     setThisNode(node);
@@ -55,13 +54,13 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   };
 
   const handleFirstButtonClick = (e) => {
-    const activeButtons = document.querySelectorAll(".menu-item.is-active");
+    const activeButtons = document.querySelectorAll(".menu-item.active");
 
     activeButtons.forEach((btn) => {
-      btn.classList.remove("is-active");
+      btn.classList.remove("active");
     });
 
-    e.target.parentElement.classList.add("is-active");
+    e.target.parentElement.classList.add("active");
   };
 
   const getOrganization = (node, index) => {
@@ -73,6 +72,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
             placement="top"
             delay={{ show: 250, hide: 400 }}
             overlay={renderTooltip(null, node.id)}
+            key={node.id}
           >
             <StyledButton
               className="menu-item"
@@ -80,7 +80,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
               index={index + 1}
               ref={ref}
               data-node={node.id}
-              key={index + 1}
+              key={node.id}
               title={node.id}
               onClick={(e) => callToNodes(e, node)}
             >
@@ -107,7 +107,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
             active={checkIndex(index)}
             index={index + 1}
             ref={ref}
-            key={index + 1}
+            key={node.id}
             data-node={node.id}
             title={node.id}
             onClick={(e) => callToNodes(e, node)}
@@ -141,10 +141,10 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   return (
     <StyledMenuList>
       <StyledButton
-        className="menu-item menu-item-info is-active"
+        className="menu-item menu-item-info active"
         index={0}
         ref={ref}
-        key={0}
+        key="projekt"
         title="O projekcie"
         data-node="O projekcie"
         onClick={(e) => handleFirstButtonClick(e)}
