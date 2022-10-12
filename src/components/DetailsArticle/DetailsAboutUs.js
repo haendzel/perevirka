@@ -2,7 +2,7 @@ import React from "react";
 import { StyledDetailsArticle } from "./DetailsArticle.styled";
 import openJPG from "../../images/sample.png";
 
-const DetailsArticle = () => {
+const DetailsAboutUs = () => {
   return (
     <StyledDetailsArticle className="article">
       <article>
@@ -55,7 +55,7 @@ const DetailsArticle = () => {
           </figure>
         </div>
 
-        <div className="article-block block-standard-heading-text">
+        {/* <div className="article-block block-standard-heading-text">
           <h3>Heading</h3>
           <p>
             Ut sed diam nibh accumsan. Ac odio diam, sollicitudin lectus
@@ -66,9 +66,9 @@ const DetailsArticle = () => {
             duis nibh egestas adipiscing nibh mattis nunc enim auctor. Ac
             ultricies amet nullam tincidunt tristique massa quisque placerat.
           </p>
-        </div> 
+        </div> */}
 
-        <div className="article-block block-quote-text text-center">
+        {/* <div className="article-block block-quote-text text-center">
           <blockquote className="quote-text">
             “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus
             dui, ac velit sed et risus dui quis eros. In dui in sed donec.
@@ -76,17 +76,17 @@ const DetailsArticle = () => {
             Risus vel tristique quis est aliquam fermentum.”
           </blockquote>
           <p className="author-text mt-1">John Doe, Lethaja</p>
-        </div> 
+        </div> */}
 
-         <div className="article-block image-block">
+        {/* <div className="article-block image-block">
           <figure>
             <img src={openJPG} alt="open" />
             <figcaption>Image annotation</figcaption>
           </figure>
-        </div>
+        </div> */}
       </article>
     </StyledDetailsArticle>
   );
 };
 
-export default DetailsArticle;
+export default DetailsAboutUs;

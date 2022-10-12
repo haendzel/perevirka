@@ -2,7 +2,8 @@ import React from "react";
 import RoundedBordered from "../RoundedBordered/RoundedBordered";
 import { StyledDetailsTags } from "./DetailsTags.styled";
 
-const DetailsTags = () => {
+const DetailsTags = ({node}) => {
+  console.log(node.tags)
   return (
     <StyledDetailsTags className="tags">
       <RoundedBordered type="tag">transport</RoundedBordered>

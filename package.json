@@ -1,6 +1,6 @@
 {
   "name": "perevirka",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "private": true,
   "homepage": "https://haendzel.github.io/perevirka",
   "dependencies": {
@@ -11,12 +11,15 @@
     "axios": "^0.27.2",
     "bootstrap": "5.0.0-alpha3",
     "gh-pages": "^4.0.0",
+    "i18next": "^21.10.0",
+    "i18next-browser-languagedetector": "^6.1.8",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-force-graph": "^1.41.14",
     "react-force-graph-3d": "^1.21.13",
     "react-helmet": "^6.1.0",
+    "react-i18next": "^11.18.6",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",

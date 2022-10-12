@@ -23,8 +23,10 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
         handleClick={handleClick}
       />
       <DetailsWrapper>
-        {/* <DetailsTags /> */}
+        <DetailsTags node={activeNode} />
+        { menuNode === "First item" && (
         <DetailsArticle />
+        )}
         {/* <StyledDetailsTabs>
           <DetailsTab>
             <p>Size</p>

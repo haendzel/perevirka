@@ -53,7 +53,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     );
   };
 
-  const handleFirstButtonClick = (e) => {
+  const handleFirstButtonClick = (e, node) => {
     const activeButtons = document.querySelectorAll(".menu-item.active");
 
     activeButtons.forEach((btn) => {
@@ -61,6 +61,9 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     });
 
     e.target.parentElement.classList.add("active");
+
+    changeNode(node);
+    setThisNode(node);
   };
 
   const getOrganization = (node, index) => {
@@ -147,7 +150,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         key="projekt"
         title="O projekcie"
         data-node="O projekcie"
-        onClick={(e) => handleFirstButtonClick(e)}
+        onClick={(e) => handleFirstButtonClick(e, "First item")}
       >
         <div className="d-flex justify-start align-items-center">
           <RoundedBordered type="ml-0">i</RoundedBordered>
