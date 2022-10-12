@@ -11,7 +11,23 @@ import { ForceGraph3D } from "react-force-graph";
 
 function App() {
   const fgRef = useRef();
-  const [activeNode, setActiveNode] = useState(null);
+  const aboutUsNodeAsDefault = {
+    id: "First item",
+    group: 1,
+    visible: true,
+    organization: false,
+    tags: ["example"],
+    size: "Example",
+    founders: "Example Example",
+    locations: ["Kraków"],
+    urls: [
+      { title: "Discord", url: "https://google.com" },
+      { title: "WWW", url: "https://google.com" },
+      { title: "Instagram", url: "https://google.com" },
+    ],
+    founded_date: "Autumn 2022",
+  };
+  const [activeNode, setActiveNode] = useState(aboutUsNodeAsDefault);
   let threeNodes = [];
 
   const colorForLinks = () => {

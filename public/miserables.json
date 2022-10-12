@@ -5,153 +5,272 @@
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 43 active members",
+      "founders": "Inez Donnelly",
+      "locations": ["Kraków", "Lviv", "Warszawa"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Autumn 2021"
     },
     {
       "id": "Lambda",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 102 active members",
+      "founders": "Jacek Placek",
+      "locations": ["Poznań", "Lviv", "Katowice"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Early 2022"
     },
     {
       "id": "SDK Słonecznik",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Tosia",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "KMWTW",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Letjaha",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Stewardessy Pokoju",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Cyber Elfy",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Fundacja Wolno Nam",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Zupa dla Ukrainy",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Andżela Doniec One Man Army",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "MTP",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "PomocniLudzie",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Grupa Stonewall",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Borys Tynka",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Ukraina Pomagamy",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Nie-nieodpowiedzialni",
       "group": 1,
       "visible": true,
       "organization": true,
-      "tags": [
-        "transport", "online", "logistics"
-      ]
+      "tags": ["transport", "online", "logistics"],
+      "size": "Approx 11 active members",
+      "founders": "John Doe",
+      "locations": ["Kyiv", "Kharkiv", "Uzhorod"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Late 1997"
     },
     {
       "id": "Accomodation",
