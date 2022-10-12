@@ -4,103 +4,154 @@
       "id": "Folkowisko",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Lambda",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "SDK Słonecznik",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Tosia",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "KMWTW",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Letjaha",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Stewardessy Pokoju",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Cyber Elfy",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Fundacja Wolno Nam",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Zupa dla Ukrainy",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Andżela Doniec One Man Army",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "MTP",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "PomocniLudzie",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Grupa Stonewall",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Borys Tynka",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Ukraina Pomagamy",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Nie-nieodpowiedzialni",
       "group": 1,
       "visible": true,
-      "organization": true
+      "organization": true,
+      "tags": [
+        "transport", "online", "logistics"
+      ]
     },
     {
       "id": "Accomodation",
