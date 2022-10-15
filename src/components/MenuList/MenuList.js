@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { StyledMenuList } from "./MenuList.styled";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { StyledButton } from "./MenuListItem/MenuListItem.styled";
@@ -6,6 +7,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import RoundedBordered from "../RoundedBordered/RoundedBordered";
 
 const MenuList = ({ changeNode, activeNode, handleClick }) => {
+  const { t } = useTranslation();
   const [nodes, setNodes] = useState([]);
   const [thisNode, setThisNode] = useState({});
   const ref = useRef(null);
@@ -148,13 +150,13 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         index={0}
         ref={ref}
         key="projekt"
-        title="O projekcie"
-        data-node="O projekcie"
+        title={t("about_us")}
+        data-node={t("about_us")}
         onClick={(e) => handleFirstButtonClick(e, "First item")}
       >
         <div className="d-flex justify-start align-items-center">
           <RoundedBordered type="ml-0">i</RoundedBordered>
-          <span>O projekcie</span>
+          <span>{t("about_us")}</span>
         </div>
       </StyledButton>
       {nodes.map((node, index) => getOrganization(node, index))}

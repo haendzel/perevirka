@@ -10,3 +10,13 @@ export const DetailsWrapper = styled.div`
   flex-direction: column;
   align-content: stretch;
 `;
+
+export const DetailsWrapperArticle = styled.div`
+  width: 100%;
+  background-color: ${theme.primary};
+  border-left: none;
+  height: calc(100% - 35px);
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+`;

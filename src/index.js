@@ -1,5 +1,6 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "./i18n";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
@@ -9,7 +10,7 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <Router basename="/perevirka">
+  <StrictMode>
     <App>
       <Helmet>
         <meta charSet="utf-8" />
@@ -17,5 +18,5 @@ root.render(
         <link rel="canonical" href="https://haendzel.github.io/perevirka" />
       </Helmet>
     </App>
-  </Router>
+  </StrictMode>
 );
