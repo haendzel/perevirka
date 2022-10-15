@@ -1,6 +1,22 @@
 {
   "nodes": [
     {
+      "id": "First item",
+      "group": 1,
+      "visible": true,
+      "organization": false,
+      "tags": ["example"],
+      "size": "Example",
+      "founders": "Example Example",
+      "locations": ["Kraków"],
+      "urls": [
+        { "title": "Discord", "url": "https://google.com" },
+        { "title": "WWW", "url": "https://google.com" },
+        { "title": "Instagram", "url": "https://google.com" }
+      ],
+      "founded_date": "Autumn 2022"
+    },
+    {
       "id": "Folkowisko",
       "group": 1,
       "visible": true,
