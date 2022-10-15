@@ -1,123 +1,34 @@
-import "./App.css";
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import { GlobalStyle } from "./theme/mainTheme";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-//import FocusGraph from "./components/FocusGraph/FocusGraph";
+import React, { Component } from "react";
+// import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./layouts/Header/Header";
+import Footer from "./layouts/Footer/Footer";
+import Home from "./pages/Home/Home";
+import Article from "./pages/Article/Article";
 import { StyledSideFrame } from "./components/SideFrame/SideFrame.styled";
-import SideMenu from "./components/SideMenu/SideMenu";
-import SpriteText from "three-spritetext";
-import { ForceGraph3D } from "react-force-graph";
+import { GlobalStyle } from "./theme/mainTheme";
+// import Contact from "./pages/Contact";
 
 function App() {
-  const fgRef = useRef();
-  const [activeNode, setActiveNode] = useState(null);
-  let threeNodes = [];
+  const { ready } = useTranslation();
 
-  const colorForLinks = () => {
-    return "#F9F9F9";
-  };
+  if (ready) {
+    return (
+      <BrowserRouter>
+        <GlobalStyle />
+        <Header />
 
-  const handleClick = useCallback(
-    (node) => {
-      if (node?.id) {
-        const activeButtons = document.querySelectorAll(".menu-item.active");
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/resistance-infrastructures" element={<Article />} />
+        </Routes>
 
-        activeButtons.forEach((btn) => {
-          btn.classList.remove("active");
-        });
-
-        const distance = 70;
-        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
-        setActiveNode(node);
-        console.log(node);
-        if (fgRef.current) {
-          fgRef.current.cameraPosition(
-            {
-              x: node.x * distRatio,
-              y: node.y * distRatio,
-              z: node.z * distRatio,
-            },
-            node,
-            3000
-          );
-        }
-      } else {
-        let activeNodeFromDOM =
-          document.querySelector(".menu-item.active").dataset.node;
-        console.log(activeNodeFromDOM);
-        console.log(threeNodes);
-        if (activeNodeFromDOM !== null) {
-          var items = threeNodes.filter(
-            (item) => item.id === activeNodeFromDOM
-          );
-          var item = items[0];
-          console.log(item);
-          const distance = 70;
-          const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
-          if (fgRef.current) {
-            fgRef.current.cameraPosition(
-              {
-                x: item.x * distRatio,
-                y: item.y * distRatio,
-                z: item.z * distRatio,
-              },
-              item,
-              3000
-            );
-          }
-        }
-      }
-    },
-    [fgRef]
-  );
-
-  return (
-    <>
-      <GlobalStyle />
-      <Header />
-      <StyledSideFrame left={true} right={false} />
-      <SideMenu
-        activeNode={activeNode}
-        changeMenuNode={(menuNode) => setActiveNode(menuNode)}
-        handleClick={handleClick}
-      />
-      <ForceGraph3D
-        //width={window.innerWidth - 250}
-        ref={fgRef}
-        distance={100}
-        forceEngine={"d3"}
-        dagLevelDistance={10}
-        width={window.innerWidth}
-        jsonUrl="https://haendzel.github.io/perevirka/miserables.json"
-        nodeAutoColorBy="group"
-        backgroundColor="#000"
-        linkColor={colorForLinks}
-        onNodeClick={handleClick}
-        showNavInfo={false}
-        nodeThreeObject={(node) => {
-          const sprite = new SpriteText(node.id);
-          sprite.color = "#000";
-          sprite.fontFace = "Inter";
-          sprite.fontWeight = "500";
-          sprite.textHeight = 6;
-
-          if (node.city) {
-            sprite.color = "#E0E0E0";
-          } else if (node.organization) {
-            threeNodes.push(node);
-            sprite.color = "#FE6C2D";
-          } else {
-            sprite.color = "#808080";
-          }
-
-          return sprite;
-        }}
-      />
-      <StyledSideFrame right={true} left={false} />
-      <Footer />
-    </>
-  );
+        <Footer />
+      </BrowserRouter>
+    );
+  }
 }
-
 export default App;
