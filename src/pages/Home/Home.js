@@ -1,4 +1,5 @@
 import "../../App.css";
+import i18n from "../../i18n";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import SpriteText from "three-spritetext";
@@ -24,6 +25,7 @@ function Home() {
   const [activeNode, setActiveNode] = useState(null);
   const [data, setData] = useState(initialData);
   const [isBusy, setIsBusy] = useState(false);
+  let lng = i18n.language;
   let threeNodes = [];
 
   let nodesArrayHelper = [];
@@ -38,12 +40,14 @@ function Home() {
   }
 
   function fetchData() {
-    fetch("http://localhost:1337/api/nodes?populate=*")
+    fetch(
+      `https://serene-dusk-83995.herokuapp.com/api/nodes?populate=*&locale=${lng}`
+    )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.data);
+        console.log(data?.data);
 
         data.data?.map((item) => {
           item.id = item.attributes.node_id;
@@ -51,6 +55,7 @@ function Home() {
           item.city = false;
           item.group = 1;
           nodesArrayHelper.push(item);
+          threeNodes.push(item);
 
           item.attributes.tags?.data.map((tag) => {
             linksArrayHelper.push({
@@ -61,12 +66,14 @@ function Home() {
           });
         });
 
-        fetch("http://localhost:1337/api/tags?populate=*")
+        fetch(
+          `https://serene-dusk-83995.herokuapp.com/api/tags?populate=*&locale=${lng}`
+        )
           .then((response) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data.data);
+            console.log(data?.data);
             data.data?.map((item) => {
               item.id = item.attributes.name;
               item.city = item.attributes.tag ? false : true;
@@ -97,38 +104,45 @@ function Home() {
   }
 
   useEffect(() => {
+    if (lng === "ua") {
+      lng = "uk";
+    }
     fetchData();
-  }, []);
+  }, [lng]);
 
   const handleClick = useCallback(
     (node) => {
+      console.log("jaki node?", node);
       if (node?.id) {
-        const activeButtons = document.querySelectorAll(".menu-item.active");
+        if (node?.organization) {
+          const activeButtons = document.querySelectorAll(".menu-item.active");
 
-        activeButtons.forEach((btn) => {
-          btn.classList.remove("active");
-        });
+          activeButtons.forEach((btn) => {
+            btn.classList.remove("active");
+          });
 
-        const distance = 70;
-        const distRatio = 1 + distance / Math.hypot(node?.x, node?.y, node?.z);
-        setActiveNode(node);
-        console.log(node);
-        if (fgRef.current) {
-          fgRef.current.cameraPosition(
-            {
-              x: node.x * distRatio,
-              y: node.y * distRatio,
-              z: node.z * distRatio,
-            },
-            node,
-            3000
-          );
+          const distance = 70;
+          const distRatio =
+            1 + distance / Math.hypot(node?.x, node?.y, node?.z);
+          setActiveNode(node);
+          console.log(node);
+          if (fgRef.current) {
+            fgRef.current.cameraPosition(
+              {
+                x: node.x * distRatio,
+                y: node.y * distRatio,
+                z: node.z * distRatio,
+              },
+              node,
+              3000
+            );
+          }
         }
       } else {
         let activeNodeFromDOM =
           document.querySelector(".menu-item.active").dataset.node;
-        console.log(activeNodeFromDOM);
-        console.log(threeNodes);
+        console.log("active node from dom: ", activeNodeFromDOM);
+        console.log("threeNodes: ", threeNodes);
         if (activeNodeFromDOM !== null) {
           var items = threeNodes.filter(
             (item) => item.id === activeNodeFromDOM
@@ -189,7 +203,7 @@ function Home() {
         //     },
         //   ],
         //}}
-        //jsonUrl="http://localhost:1337/api/nodes?populate=*"
+        //jsonUrl="https://serene-dusk-83995.herokuapp.com/api/nodes?populate=*"
         nodeAutoColorBy="group"
         backgroundColor="#000"
         linkColor={colorForLinks}
@@ -205,7 +219,6 @@ function Home() {
           if (node.city) {
             sprite.color = "#E0E0E0";
           } else if (node.organization) {
-            threeNodes.push(node);
             sprite.color = "#FE6C2D";
           } else {
             sprite.color = "#808080";

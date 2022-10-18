@@ -107,6 +107,16 @@ export const GlobalStyle = createGlobalStyle`
   .scene-container {
     background-color: black;
     margin-left: -15%;
+
+    @media ${device.laptop13} {
+        margin-left: -25%;
+      }
+
+      @media ${device.desktop} {
+        margin-left: -15%;
+      }
+
+
   }
 
   .article {
@@ -158,6 +168,13 @@ export const GlobalStyle = createGlobalStyle`
   .brand {
     a {
       padding-right: 16px;
+    }
+  }
+
+  button {
+    &:focus, &:active {
+      box-shadow: none;
+      outline: none;
     }
   }
 

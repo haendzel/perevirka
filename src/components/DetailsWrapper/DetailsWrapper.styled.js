@@ -1,4 +1,4 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const DetailsWrapper = styled.div`
@@ -9,6 +9,14 @@ export const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-content: stretch;
+
+  @media ${device.laptop13} {
+    width: 380px;
+  }
+
+  @media ${device.desktop} {
+    width: 420px;
+  }
 `;
 
 export const DetailsWrapperArticle = styled.div`

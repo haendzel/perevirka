@@ -15,8 +15,6 @@ import { GlobalStyle } from "./theme/mainTheme";
 function App() {
   const { ready } = useTranslation();
 
-  console.log("i fire once");
-
   if (ready) {
     return (
       <BrowserRouter>

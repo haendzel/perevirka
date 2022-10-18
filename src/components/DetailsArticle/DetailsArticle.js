@@ -3,7 +3,7 @@ import { StyledDetailsArticle } from "./DetailsArticle.styled";
 import openJPG from "../../images/sample.png";
 
 const DetailsArticle = ({ node }) => {
-  const flexibleContents = node?.attributes.flexible_content;
+  const flexibleContents = node?.attributes?.flexible_content;
 
   return (
     <StyledDetailsArticle className="article">

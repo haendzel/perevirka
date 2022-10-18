@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { StyledMenuList } from "./MenuList.styled";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -10,16 +11,19 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   const { t } = useTranslation();
   const [nodes, setNodes] = useState([]);
   const [thisNode, setThisNode] = useState({});
+  const [firstTime, setFirstTime] = useState(true);
   const ref = useRef(null);
+  let lng = i18n.language;
 
   const fetchData = () => {
-    fetch("http://localhost:1337/api/nodes?populate=*")
+    fetch(
+      `https://serene-dusk-83995.herokuapp.com/api/nodes?populate=*&locale=${lng}`
+    )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        setNodes(data.data);
+        setNodes(data?.data);
       });
   };
 
@@ -62,8 +66,6 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     activeButtons.forEach((btn) => {
       btn.classList.remove("active");
     });
-
-    e.target.parentElement.classList.add("active");
 
     changeNode(node);
     setThisNode(node);
@@ -140,19 +142,27 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   };
 
   useEffect(() => {
+    if (lng === "ua") {
+      lng = "uk";
+    }
+    if (firstTime) {
+      changeNode("First item");
+      setFirstTime(false);
+    }
     fetchData();
     setThisNode(activeNode);
-  }, [thisNode]);
+  }, [thisNode, lng]);
 
   return (
     <StyledMenuList>
       <StyledButton
         className="menu-item menu-item-info active"
+        active={0}
         index={0}
         ref={ref}
         key="projekt"
         title={t("about_us")}
-        data-node={t("about_us")}
+        data-node="First item"
         onClick={(e) => handleFirstButtonClick(e, "First item")}
       >
         <div className="d-flex justify-start align-items-center">
