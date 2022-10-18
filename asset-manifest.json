@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/perevirka/static/css/main.10347e4c.css",
-    "main.js": "/perevirka/static/js/main.46dc561d.js",
+    "main.js": "/perevirka/static/js/main.e2d8d0d7.js",
     "static/media/sample.png": "/perevirka/static/media/sample.394685b022874d476473.png",
     "index.html": "/perevirka/index.html",
     "static/media/getFetch.cjs": "/perevirka/static/media/getFetch.40f37ddea2378391108f.cjs",
     "static/media/arrow-up.svg": "/perevirka/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
     "main.10347e4c.css.map": "/perevirka/static/css/main.10347e4c.css.map",
-    "main.46dc561d.js.map": "/perevirka/static/js/main.46dc561d.js.map"
+    "main.e2d8d0d7.js.map": "/perevirka/static/js/main.e2d8d0d7.js.map"
   },
   "entrypoints": [
     "static/css/main.10347e4c.css",
-    "static/js/main.46dc561d.js"
+    "static/js/main.e2d8d0d7.js"
   ]
 }
