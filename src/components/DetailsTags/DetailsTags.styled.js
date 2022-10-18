@@ -6,8 +6,9 @@ export const StyledDetailsTags = styled.div`
   width: 100%;
   background-color: transparent;
   border-bottom: 1px solid ${theme.black};
+  padding: 6px 0;
   height: auto;
-  min-height: 40px;
+  min-height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

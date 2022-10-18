@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_content_heading_text_content_heading_with_texts",
+  "info": {
+    "displayName": "Content heading with text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "hash": {
+      "type": "string"
+    }
+  }
+}

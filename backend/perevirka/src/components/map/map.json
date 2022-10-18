@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_map_maps",
+  "info": {
+    "displayName": "Map",
+    "icon": "sitemap",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Nodes": {
+      "displayName": "Nodes",
+      "type": "component",
+      "repeatable": true,
+      "component": "nodes.nodes"
+    }
+  }
+}

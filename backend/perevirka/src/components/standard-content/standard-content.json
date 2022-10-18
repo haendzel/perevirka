@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_standard_content_standard_contents",
+  "info": {
+    "displayName": "Standard content",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "richtext"
+    },
+    "hash": {
+      "type": "string"
+    }
+  }
+}

@@ -89,7 +89,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .tags {
     .tag {
-      margin: 0 0 0 6px !important;
+      margin: 3px 0 3px 6px !important;
 
       &:hover {
         background-color: ${theme.darkgray};
@@ -167,5 +167,9 @@ export const GlobalStyle = createGlobalStyle`
 
   .btn {
     box-shadow: none !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 `;

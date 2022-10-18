@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_li_lis",
+  "info": {
+    "displayName": "li",
+    "icon": "angle-double-right"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

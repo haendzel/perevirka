@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import DetailsArticle from "../DetailsArticle/DetailsArticle";
+import i18n from "../../i18n";
 import DetailsTags from "../DetailsTags/DetailsTags";
 import { DetailsWrapper } from "../DetailsWrapper/DetailsWrapper.styled";
 import MenuList from "../MenuList/MenuList";
@@ -12,8 +13,24 @@ import { ReactComponent as SocialIcon } from "../../assets/icons/arrow-up.svg";
 
 const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
   const [menuNode, setMenuNode] = useState(null);
+  const [aboutUs, setAboutUs] = useState(null);
   const { t, i18n, ready } = useTranslation();
+  let lng = i18n.language;
+  console.log(lng);
+
+  const fetchAboutUs = () => {
+    fetch(`http://localhost:1337/api/about-us?populate=*&locale=${lng}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.data);
+        setAboutUs(data.data);
+      });
+  };
+
   useEffect(() => {
+    fetchAboutUs();
     changeMenuNode(menuNode);
   }, [menuNode]);
 
@@ -33,31 +50,35 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
               <StyledDetailsTabs>
                 <DetailsTab>
                   <p className="fw-medium">{t("size")}</p>
-                  <p>{activeNode?.size}</p>
+                  <p>{activeNode?.attributes.size}</p>
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("founders")}</p>
-                  <p>{activeNode?.founders}</p>
+                  <p>{activeNode?.attributes.founders}</p>
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("locations")}</p>
                   <div className="locations">
-                    {activeNode?.locations?.map((item) => (
-                      <a
-                        href="#"
-                        className="d-inline-block social-link text-underline me-1"
-                      >
-                        {item}
-                      </a>
-                    ))}
+                    {activeNode?.attributes.locations?.data.map(
+                      (item, index) => (
+                        <a
+                          href="#"
+                          className="d-inline-block social-link text-underline me-1"
+                          key={index}
+                        >
+                          {item.attributes.name}
+                        </a>
+                      )
+                    )}
                   </div>
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("url")}</p>
                   <div className="socials">
-                    {activeNode?.urls?.map((item) => (
+                    {activeNode?.attributes.URL?.map((item, index) => (
                       <a
                         target="_blank"
+                        key={index}
                         href={item.url}
                         className="d-inline-block social-link text-underline me-1"
                       >
@@ -69,13 +90,13 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("founded_date")}</p>
-                  <p>{activeNode?.founded_date}</p>
+                  <p>{activeNode?.attributes.founded_date}</p>
                 </DetailsTab>
               </StyledDetailsTabs>
             </>
           )}
 
-          {menuNode === "First item" && <DetailsAboutUs />}
+          {menuNode === "First item" && <DetailsAboutUs aboutUs={aboutUs} />}
         </DetailsWrapper>
       </StyledSideMenu>
     );

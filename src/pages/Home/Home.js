@@ -1,18 +1,104 @@
 import "../../App.css";
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import SpriteText from "three-spritetext";
 import { StyledSideFrame } from "../../components/SideFrame/SideFrame.styled";
 import { ForceGraph3D } from "react-force-graph";
+import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
+
+const initialNodesArray = [
+  { id: "SDK SŁonecznik", organization: true, val: 10 },
+  { id: "Lambda", organization: true, val: 9 },
+  { id: "Kraków", organization: false, city: true, val: 1 },
+];
+
+let linksArrayInitial = [{ source: "Lambda", target: "Kraków" }];
+
+const initialData = {
+  nodes: initialNodesArray,
+  links: linksArrayInitial,
+};
 
 function Home() {
   const fgRef = useRef();
   const [activeNode, setActiveNode] = useState(null);
+  const [data, setData] = useState(initialData);
+  const [isBusy, setIsBusy] = useState(false);
   let threeNodes = [];
+
+  let nodesArrayHelper = [];
+  let linksArrayHelper = [];
 
   const colorForLinks = () => {
     return "#F9F9F9";
   };
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function fetchData() {
+    fetch("http://localhost:1337/api/nodes?populate=*")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.data);
+
+        data.data?.map((item) => {
+          item.id = item.attributes.node_id;
+          item.organization = true;
+          item.city = false;
+          item.group = 1;
+          nodesArrayHelper.push(item);
+
+          item.attributes.tags?.data.map((tag) => {
+            linksArrayHelper.push({
+              source: item.id,
+              target: tag.attributes.name,
+              value: getRandomInt(10),
+            });
+          });
+        });
+
+        fetch("http://localhost:1337/api/tags?populate=*")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.data);
+            data.data?.map((item) => {
+              item.id = item.attributes.name;
+              item.city = item.attributes.tag ? false : true;
+              item.organization = false;
+              item.group = item.attributes.tag ? 2 : 3;
+              nodesArrayHelper.push(item);
+
+              const ids = nodesArrayHelper.map((o) => o.id);
+              const filteredArray = nodesArrayHelper.filter(
+                ({ id }, index) => !ids.includes(id, index + 1)
+              );
+
+              const exampleArray = [
+                { source: "cybersec", target: "Lambda" },
+                { source: "spedition", target: "Folkowisko" },
+                { source: "accomodation", target: "Folkowisko" },
+              ];
+
+              setData({
+                nodes: filteredArray,
+                links: [...linksArrayHelper],
+              });
+
+              setIsBusy(false);
+            });
+          });
+      });
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleClick = useCallback(
     (node) => {
@@ -24,7 +110,7 @@ function Home() {
         });
 
         const distance = 70;
-        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+        const distRatio = 1 + distance / Math.hypot(node?.x, node?.y, node?.z);
         setActiveNode(node);
         console.log(node);
         if (fgRef.current) {
@@ -76,14 +162,34 @@ function Home() {
         changeMenuNode={(menuNode) => setActiveNode(menuNode)}
         handleClick={handleClick}
       />
+
       <ForceGraph3D
-        //width={window.innerWidth - 250}
         ref={fgRef}
         distance={100}
         forceEngine={"d3"}
         dagLevelDistance={10}
         width={window.innerWidth}
-        jsonUrl="https://haendzel.github.io/perevirka/miserables.json"
+        graphData={data}
+        // graphData={{
+        //   nodes: [
+        //     { id: "Kraków", organization: false, city: true },
+        //     { id: "Folkowisko", organization: true },
+        //     { id: "Lambda", organization: true },
+        //   ],
+        //   links: [
+        //     {
+        //       source: "Folkowisko",
+        //       target: "Kraków",
+        //       value: 1,
+        //     },
+        //     {
+        //       source: "Lambda",
+        //       target: "Kraków",
+        //       value: 1,
+        //     },
+        //   ],
+        //}}
+        //jsonUrl="http://localhost:1337/api/nodes?populate=*"
         nodeAutoColorBy="group"
         backgroundColor="#000"
         linkColor={colorForLinks}
@@ -108,6 +214,7 @@ function Home() {
           return sprite;
         }}
       />
+
       <StyledSideFrame right={true} left={false} />
     </>
   );

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 // import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
 import AOS from "aos";
@@ -14,6 +14,8 @@ import { GlobalStyle } from "./theme/mainTheme";
 
 function App() {
   const { ready } = useTranslation();
+
+  console.log("i fire once");
 
   if (ready) {
     return (

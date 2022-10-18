@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_nodes_nodes",
+  "info": {
+    "displayName": "Nodes",
+    "icon": "bullhorn",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "node_id": {
+      "type": "string"
+    },
+    "group": {
+      "type": "integer"
+    },
+    "visible": {
+      "type": "boolean"
+    },
+    "organization": {
+      "type": "boolean"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    }
+  }
+}

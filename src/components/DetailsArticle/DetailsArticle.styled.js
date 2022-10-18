@@ -5,9 +5,20 @@ export const StyledDetailsArticle = styled.div`
   height: 100%;
   width: 100%;
 
-  article {
+  article,
+  .content {
     overflow: auto;
-    max-height: 100%;
+    max-height: calc(100% - 200px);
     border-bottom: none;
+
+    .article-block {
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+  }
+
+  .content {
+    max-height: 100%;
   }
 `;

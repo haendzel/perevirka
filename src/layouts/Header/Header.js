@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { Container } from "react-bootstrap";
@@ -10,6 +10,12 @@ import { NavLink, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const [lang, setLang] = useState("en");
+
+  useEffect(() => {
+    setLang(i18n.language);
+  }, [lang]);
 
   const { t } = useTranslation();
 

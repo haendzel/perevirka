@@ -13,13 +13,13 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   const ref = useRef(null);
 
   const fetchData = () => {
-    fetch("https://haendzel.github.io/perevirka/miserables.json")
+    fetch("http://localhost:1337/api/nodes?populate=*")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         console.log(data);
-        setNodes(data.nodes);
+        setNodes(data.data);
       });
   };
 
@@ -41,6 +41,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     });
 
     e.target.parentElement.classList.add("active");
+    console.log("call to nodes", node);
 
     changeNode(node);
     setThisNode(node);
@@ -68,10 +69,10 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     setThisNode(node);
   };
 
-  const getOrganization = (node, index) => {
-    var nodeStringLength = node.id.length;
-    if (node.organization === true) {
-      if (node.id.length > 15) {
+  const getOrganizations = (node, index) => {
+    var nodeStringLength = node.attributes.node_id.length;
+    if (node.attributes.organization === true) {
+      if (node.attributes.node_id.length > 15) {
         return (
           <OverlayTrigger
             placement="top"
@@ -84,9 +85,9 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
               active={checkIndex(index)}
               index={index + 1}
               ref={ref}
-              data-node={node.id}
-              key={node.id}
-              title={node.id}
+              data-node={node.node_id}
+              key={node.node_id}
+              title={node.node_id}
               onClick={(e) => callToNodes(e, node)}
             >
               <div className="d-flex justify-start align-items-center">
@@ -95,8 +96,8 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
                 </RoundedBordered>
                 <span>
                   {nodeStringLength < 16
-                    ? node.id
-                    : node.id.substring(
+                    ? node.attributes.node_id
+                    : node.attributes.node_id.substring(
                         0,
                         nodeStringLength - (nodeStringLength - 14)
                       ) + "..."}
@@ -112,9 +113,9 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
             active={checkIndex(index)}
             index={index + 1}
             ref={ref}
-            key={node.id}
-            data-node={node.id}
-            title={node.id}
+            key={node.attributes.node_id}
+            data-node={node.attributes.node_id}
+            title={node.attributes.node_id}
             onClick={(e) => callToNodes(e, node)}
           >
             <div className="d-flex justify-start align-items-center">
@@ -123,8 +124,8 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
               </RoundedBordered>
               <span>
                 {nodeStringLength < 16
-                  ? node.id
-                  : node.id.substring(
+                  ? node.attributes.node_id
+                  : node.attributes.node_id.substring(
                       0,
                       nodeStringLength - (nodeStringLength - 14)
                     ) + "..."}
@@ -159,7 +160,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
           <span>{t("about_us")}</span>
         </div>
       </StyledButton>
-      {nodes.map((node, index) => getOrganization(node, index))}
+      {nodes.map((node, index) => getOrganizations(node, index))}
     </StyledMenuList>
   );
 };
