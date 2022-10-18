@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/perevirka/static/css/main.6cc0fc89.css",
-    "main.js": "/perevirka/static/js/main.24e0b656.js",
-    "static/media/sample.png": "/perevirka/static/media/sample.394685b022874d476473.png",
-    "index.html": "/perevirka/index.html",
-    "static/media/arrow-up.svg": "/perevirka/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
-    "main.6cc0fc89.css.map": "/perevirka/static/css/main.6cc0fc89.css.map",
-    "main.24e0b656.js.map": "/perevirka/static/js/main.24e0b656.js.map"
+    "main.css": "/static/css/main.10347e4c.css",
+    "main.js": "/static/js/main.c6941819.js",
+    "static/media/sample.png": "/static/media/sample.394685b022874d476473.png",
+    "index.html": "/index.html",
+    "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "static/media/arrow-up.svg": "/static/media/arrow-up.9f354a6c827eb65a8e5fc66cb6325789.svg",
+    "main.10347e4c.css.map": "/static/css/main.10347e4c.css.map",
+    "main.c6941819.js.map": "/static/js/main.c6941819.js.map"
   },
   "entrypoints": [
-    "static/css/main.6cc0fc89.css",
-    "static/js/main.24e0b656.js"
+    "static/css/main.10347e4c.css",
+    "static/js/main.c6941819.js"
   ]
 }
