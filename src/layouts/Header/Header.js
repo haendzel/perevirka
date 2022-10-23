@@ -31,7 +31,7 @@ const Header = () => {
           <div className="d-flex align-items-center justify-content-start">
             <div className="brand">
               <NavLink
-                to="/"
+                to="/perevirka"
                 className="mono-font text-uppercase fw-medium mb-0"
               >
                 перевірка/PEREVIRKA
