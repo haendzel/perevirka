@@ -14,7 +14,7 @@ root.render(
     <Helmet>
       <meta charSet="utf-8" />
       <title>Perevirka / Перевірка</title>
-      <link rel="canonical" href="https://haendzel.github.io/perevirka" />
+      <link rel="canonical" href="https://perevirka.com" />
     </Helmet>
   </App>
 );

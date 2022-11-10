@@ -22,7 +22,7 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/perevirka" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/resistance-infrastructures" element={<Article />} />
         </Routes>
 

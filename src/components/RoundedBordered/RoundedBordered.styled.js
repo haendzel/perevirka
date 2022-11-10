@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 export const StyledRoundedBordered = styled.a`
   display: inline-block;
+  background: transparent !important;
+  outline: none;
   padding: 4px 11px;
   margin: 0 24px;
   border: 1px solid ${theme.black};

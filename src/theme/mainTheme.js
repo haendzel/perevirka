@@ -189,4 +189,17 @@ export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
   }
+
+  .active {
+      button {
+      box-shadow: inset 0 0 0 1px ${theme.black};
+      transition: all 0.25s ease-in;
+
+      &:hover {
+        box-shadow: inset 0 0 0 1px ${theme.black};
+        transition: all 0.25s ease-in;
+      }
+    }
+      
+  }
 `;

@@ -31,14 +31,17 @@ const Header = () => {
           <div className="d-flex align-items-center justify-content-start">
             <div className="brand">
               <NavLink
-                to="/perevirka"
+                to="/"
                 className="mono-font text-uppercase fw-medium mb-0"
               >
                 перевірка/PEREVIRKA
               </NavLink>
             </div>
-            <NavLink to="/resistance-infrastructures" activeclassname="active">
-              <HeaderLink>{t("resistance")}</HeaderLink>
+            <NavLink
+              to="/resistance-infrastructures"
+              activeClassName="is-active-header-tab"
+            >
+              <HeaderLink className="header-link">{t("resistance")}</HeaderLink>
             </NavLink>
           </div>
           <div className="lang-panel d-flex justify-content-start align-items-center">

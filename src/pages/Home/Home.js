@@ -5,7 +5,6 @@ import SideMenu from "../../components/SideMenu/SideMenu";
 import SpriteText from "three-spritetext";
 import { StyledSideFrame } from "../../components/SideFrame/SideFrame.styled";
 import { ForceGraph3D } from "react-force-graph";
-import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
 
 const initialNodesArray = [
   { id: "SDK SŁonecznik", organization: true, val: 10 },
@@ -184,26 +183,6 @@ function Home() {
         dagLevelDistance={10}
         width={window.innerWidth}
         graphData={data}
-        // graphData={{
-        //   nodes: [
-        //     { id: "Kraków", organization: false, city: true },
-        //     { id: "Folkowisko", organization: true },
-        //     { id: "Lambda", organization: true },
-        //   ],
-        //   links: [
-        //     {
-        //       source: "Folkowisko",
-        //       target: "Kraków",
-        //       value: 1,
-        //     },
-        //     {
-        //       source: "Lambda",
-        //       target: "Kraków",
-        //       value: 1,
-        //     },
-        //   ],
-        //}}
-        //jsonUrl="https://serene-dusk-83995.herokuapp.com/api/nodes?populate=*"
         nodeAutoColorBy="group"
         backgroundColor="#000"
         linkColor={colorForLinks}
