@@ -20,7 +20,7 @@ const Header = () => {
   const { t } = useTranslation();
 
   const changeLanguage = (lng) => {
-    console.log(lng);
+    window.location.reload(false);
     i18n.changeLanguage(lng);
   };
 

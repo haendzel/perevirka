@@ -1,4 +1,4 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledRoundedBordered = styled.a`
@@ -6,7 +6,7 @@ export const StyledRoundedBordered = styled.a`
   background: transparent !important;
   outline: none;
   padding: 4px 11px;
-  margin: 0 24px;
+  margin: 0 12px;
   border: 1px solid ${theme.black};
   line-height: 16px;
   font-size: 13px;
@@ -15,4 +15,8 @@ export const StyledRoundedBordered = styled.a`
   min-width: 40px;
   text-align: center;
   cursor: pointer;
+
+  @media ${device.tablet} {
+    margin: 0 24px;
+  }
 `;

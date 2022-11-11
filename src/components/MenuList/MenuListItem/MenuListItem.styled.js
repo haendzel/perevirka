@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { theme } from "../../../theme/mainTheme";
+import { theme, device } from "../../../theme/mainTheme";
 import Button from "react-bootstrap/Button";
 
 export const StyledMenuListItem = styled.button`
   display: block;
   border: none;
-  line-height: 17px;
-  font-size: 14px;
+  line-height: 14px;
+  font-size: 11px;
   font-weight: 500;
   max-width: 230px;
-  height: 40px;
+  height: 30px;
   padding: 8px;
   min-width: 230px;
   cursor: pointer;
@@ -29,6 +29,12 @@ export const StyledMenuListItem = styled.button`
       transform: translateY(-50%);
     }
   }
+
+  @media ${device.tablet} {
+    height: 40px;
+    line-height: 17px;
+    font-size: 14px;
+  }
 `;
 
 export const StyledButton = styled(Button)`
@@ -38,11 +44,17 @@ export const StyledButton = styled(Button)`
   border: none;
   background: transparent;
   color: ${theme.black};
-  line-height: 17px;
-  font-size: 14px;
+  line-height: 14px;
+  font-size: 12px;
   font-weight: 500;
   height: 40px;
   padding: 8px;
+
+  @media ${device.tablet} {
+    height: 40px;
+    line-height: 17px;
+    font-size: 14px;
+  }
 
   span,
   a {

@@ -1,4 +1,4 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledSideFrame = styled.aside`
@@ -8,7 +8,7 @@ export const StyledSideFrame = styled.aside`
   background-color: ${theme.primary};
   height: 100vh;
   z-index: 999;
-  width: 24px;
+  width: 12px;
   ${({ left }) =>
     left &&
     `
@@ -23,4 +23,8 @@ export const StyledSideFrame = styled.aside`
     border-left: 1px solid ${theme.black};
     left: auto;
   `}
+
+   @media ${device.tablet} {
+    width: 24px;
+  }
 `;

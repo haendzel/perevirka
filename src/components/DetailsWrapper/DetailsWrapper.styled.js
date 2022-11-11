@@ -2,20 +2,17 @@ import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const DetailsWrapper = styled.div`
-  width: 460px;
+  width: 100%;
   background-color: ${theme.primary};
   border-left: 1px solid ${theme.black};
-  height: calc(100% - 35px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-content: stretch;
 
-  @media ${device.laptop13} {
-    width: 380px;
-  }
-
-  @media ${device.desktop} {
-    width: 420px;
+  @media ${device.tablet} {
+    width: 460px;
+    height: calc(100% - 35px);
   }
 `;
 
@@ -23,8 +20,12 @@ export const DetailsWrapperArticle = styled.div`
   width: 100%;
   background-color: ${theme.primary};
   border-left: none;
-  height: calc(100% - 35px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-content: stretch;
+
+  @media ${device.tablet} {
+    height: calc(100% - 35px);
+  }
 `;

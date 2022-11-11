@@ -17,7 +17,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
 
   const fetchData = () => {
     fetch(
-      `https://serene-dusk-83995.herokuapp.com/api/nodes?populate=*&locale=${lng}`
+      `https://serene-dusk-83995.herokuapp.com/api/nodes?pagination[page]=1&pagination[pageSize]=9999&locale=${lng}&populate=*`
     )
       .then((response) => {
         return response.json();
@@ -74,12 +74,12 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   const getOrganizations = (node, index) => {
     var nodeStringLength = node.attributes.node_id.length;
     if (node.attributes.organization === true) {
-      if (node.attributes.node_id.length > 15) {
+      if (node.attributes.node_id.length > 14) {
         return (
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
-            overlay={renderTooltip(null, node.id)}
+            overlay={renderTooltip(null, node.attributes.node_id)}
             key={node.id}
           >
             <StyledButton
@@ -87,9 +87,9 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
               active={checkIndex(index)}
               index={index + 1}
               ref={ref}
-              data-node={node.node_id}
-              key={node.node_id}
-              title={node.node_id}
+              data-node={node.attributes.node_id}
+              key={node.attributes.node_id}
+              title={node.attributes.node_id}
               onClick={(e) => callToNodes(e, node)}
             >
               <div className="d-flex justify-start align-items-center">

@@ -9,17 +9,19 @@ const DetailsTags = ({ node, handleClick }) => {
   }
   return (
     <StyledDetailsTags className="tags">
-      {tags?.map((item, index) => (
-        <RoundedBordered
-          type="tag"
-          key={index}
-          node={item.attributes?.name}
-          data-node={item.attributes?.name}
-          handleClick={handleClick}
-        >
-          {item.attributes?.name}
-        </RoundedBordered>
-      ))}
+      {tags?.map((item, index) =>
+        item.attributes.tag ? (
+          <RoundedBordered
+            type="tag"
+            key={index}
+            node={item.attributes?.name}
+            data-node={item.attributes?.name}
+            handleClick={handleClick}
+          >
+            {item.attributes?.name}
+          </RoundedBordered>
+        ) : null
+      )}
     </StyledDetailsTags>
   );
 };

@@ -106,7 +106,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .scene-container {
     background-color: black;
-    margin-left: -15%;
+    margin-left: 0;
 
     @media ${device.laptop13} {
         margin-left: -25%;
@@ -115,7 +115,6 @@ export const GlobalStyle = createGlobalStyle`
       @media ${device.desktop} {
         margin-left: -15%;
       }
-
 
   }
 
