@@ -29,7 +29,7 @@ const SideMenuArticle = ({ changeMenuNode, activeNode, handleClick }) => {
                 <p>{activeNode?.size}</p>
               </DetailsTab>
               <DetailsTab>
-                <p>Founders</p>
+                <p>People</p>
                 <p>{activeNode?.founders}</p>
               </DetailsTab>
               <DetailsTab>

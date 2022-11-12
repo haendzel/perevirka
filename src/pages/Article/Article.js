@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
 import { Scrollchor } from "react-scrollchor";
 import { StyledArticleSection } from "./Article.styled";
@@ -41,7 +42,7 @@ const Article = () => {
             </div>
           </div>
           <div className="col-xl-7 article-col p-0">
-            <article className="p-0 m-0">
+            <article className="p-0 mt-0 me-0 ms-0">
               <div className="article-block article-block-title" id="0">
                 <h2>{t("resistance")}</h2>
                 <p className="article-date">
@@ -62,7 +63,9 @@ const Article = () => {
                       id={content.hash}
                     >
                       <h3>{content.heading}</h3>
-                      <p>{content.content}</p>
+                      <div>
+                        <ReactMarkdown children={content.content} />
+                      </div>
                     </div>
                   );
                 }
@@ -76,7 +79,9 @@ const Article = () => {
                       key={index}
                       id={content.hash}
                     >
-                      <p>{content.content}</p>
+                      <div>
+                        <ReactMarkdown children={content.content} />
+                      </div>
                     </div>
                   );
                 }
@@ -89,7 +94,7 @@ const Article = () => {
                       id={content.hash}
                     >
                       <figure>
-                        <img src={openJPG} alt="open" />
+                        <img src={content.image} alt="open" />
                         <figcaption>{content.caption}</figcaption>
                       </figure>
                     </div>

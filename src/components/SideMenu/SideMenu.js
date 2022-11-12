@@ -59,7 +59,7 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("founders")}</p>
-                  <p>{activeNode?.attributes?.founders}</p>
+                  <p class="people-p">{activeNode?.attributes?.founders}</p>
                 </DetailsTab>
                 <DetailsTab>
                   <p className="fw-medium">{t("locations")}</p>

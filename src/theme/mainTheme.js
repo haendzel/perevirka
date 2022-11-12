@@ -201,4 +201,13 @@ export const GlobalStyle = createGlobalStyle`
     }
       
   }
+
+  .people-p {
+    padding-left: 100px;
+    text-align: right;
+  }
+
+  img {
+    max-width: 100%;
+  }
 `;

@@ -17,7 +17,7 @@ i18n
       en: {
         translation: {
           size: "Size",
-          founders: "Founders",
+          founders: "People",
           locations: "Location/s",
           url: "URL",
           founded_date: "Founded date",
@@ -29,7 +29,7 @@ i18n
       pl: {
         translation: {
           size: "Wielkość",
-          founders: "Zainicjowana przez",
+          founders: "Ludzie",
           locations: "Miejsce/a",
           url: "URL",
           founded_date: "Data założenia",
@@ -41,7 +41,7 @@ i18n
       ua: {
         translation: {
           size: "Розмір",
-          founders: "Започаткований",
+          founders: "Люди",
           locations: "Місця",
           url: "URL",
           founded_date: "дата створення",
@@ -53,7 +53,7 @@ i18n
       ru: {
         translation: {
           size: "Размер",
-          founders: "Основан",
+          founders: "Люди",
           locations: "Места",
           url: "URL",
           founded_date: "Дата создания",

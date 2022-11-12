@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { StyledDetailsArticle } from "./DetailsArticle.styled";
 import openJPG from "../../images/sample.png";
 
@@ -19,7 +20,9 @@ const DetailsAboutUs = ({ aboutUs }) => {
                 key={index}
               >
                 <h3>{content.heading}</h3>
-                <p>{content.content}</p>
+                <div>
+                  <ReactMarkdown children={content.content} />
+                </div>
               </div>
             );
           }
@@ -30,7 +33,9 @@ const DetailsAboutUs = ({ aboutUs }) => {
                 className="article-block block-standard-heading-text"
                 key={index}
               >
-                <p>{content.content}</p>
+                <div>
+                  <ReactMarkdown children={content.content} />
+                </div>
               </div>
             );
           }

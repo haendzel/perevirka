@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import sortBy from "array-sort-by";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { StyledMenuList } from "./MenuList.styled";
@@ -23,7 +24,12 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         return response.json();
       })
       .then((data) => {
-        setNodes(data?.data);
+        setNodes(
+          data?.data.sort((a, b) =>
+            a.attributes.node_id.localeCompare(b.attributes.node_id)
+          )
+        );
+        console.log(nodes);
       });
   };
 
