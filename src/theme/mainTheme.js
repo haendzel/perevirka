@@ -167,6 +167,11 @@ export const GlobalStyle = createGlobalStyle`
   .brand {
     a {
       padding-right: 16px;
+      font-size: 12px;
+
+      @media ${device.laptop13} {
+      font-size: 14px;
+    }
     }
   }
 
@@ -210,4 +215,38 @@ export const GlobalStyle = createGlobalStyle`
   img {
     max-width: 100%;
   }
+
+  .navBarButton {
+    border: none;
+  }
+
+  .menuNav {
+  transition: all .25s ease-in-out;
+  overflow-y: scroll;
+  list-style: none;
+  position: fixed;
+  top: 0;
+  background: ${theme.bg};
+  right: -24px;
+  bottom: 0;
+  height: auto;
+  width: 0;
+  overflow: hidden;
+  max-width: 0;
+  z-index: 9;
+  padding-top: 60px;
+  padding-left: 0;
+  text-align: center;
+}
+
+.menuNav.showMenu {
+  transition: all .25s ease-in-out;
+  width: calc(100% + 24px);
+  max-width: calc(100% + 24px);
+}
+
+.menuNav li:first-child {
+  margin-top: 7rem;
+}
+
 `;

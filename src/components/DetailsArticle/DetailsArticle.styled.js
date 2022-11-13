@@ -1,4 +1,4 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledDetailsArticle = styled.div`
@@ -8,13 +8,19 @@ export const StyledDetailsArticle = styled.div`
   article,
   .content {
     overflow: auto;
-    max-height: calc(100% - 200px);
+    max-height: 400px;
     border-bottom: none;
 
     .article-block {
       &:last-child {
         border-bottom: none !important;
       }
+    }
+  }
+
+  .article {
+    @media ${device.laptop13} {
+      max-height: calc(100% - 200px);
     }
   }
 

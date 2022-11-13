@@ -6,7 +6,7 @@ export const StyledFooter = styled.footer`
   font-size: 11px;
   min-height: 35px;
   background-color: ${theme.primary};
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   z-index: 9999;

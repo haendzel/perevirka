@@ -1,14 +1,22 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledArticleSection = styled.section`
   background-color: ${theme.bg};
   margin-top: 40px;
   width: 100%;
-  height: calc(100vh - 35px);
+  height: auto;
+
+  @media ${device.laptop13} {
+    height: calc(100vh - 35px);
+  }
 
   .article-col {
-    max-height: calc(100vh - 75px);
+    max-height: 100%;
+
+    @media ${device.laptop13} {
+      max-height: calc(100vh - 75px);
+    }
   }
 
   .title-contents {
@@ -20,8 +28,15 @@ export const StyledArticleSection = styled.section`
   }
 
   .list-of-contents {
-    border-right: 1px solid ${theme.black};
-    min-height: calc(100vh - 35px);
+    min-height: auto;
+    border-bottom: 1px solid ${theme.black};
+    padding: 12px;
+
+    @media ${device.laptop13} {
+      height: calc(100vh - 35px);
+      border-right: 1px solid ${theme.black};
+      border-bottom: none;
+    }
   }
 
   .list {
@@ -51,10 +66,16 @@ export const StyledArticleSection = styled.section`
   }
 
   article {
-    border-right: 1px solid ${theme.black};
-    max-height: 100%;
-    min-height: calc(100vh - 35px);
+    height: 700px;
     overflow: auto;
+    margin-bottom: 34px;
+
+    @media ${device.laptop13} {
+      padding-bottom: 100px;
+      border-right: 1px solid ${theme.black};
+      max-height: 100%;
+      min-height: calc(100vh - 35px);
+    }
   }
 
   .article-block {

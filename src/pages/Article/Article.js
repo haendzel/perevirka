@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { StyledSideFrameArticleMobile } from "../../components/SideFrame/SideFrame.styled";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
@@ -42,7 +43,7 @@ const Article = () => {
             </div>
           </div>
           <div className="col-xl-7 article-col p-0">
-            <article className="p-0 mt-0 me-0 ms-0">
+            <article className="pt-0 pl-0 pe-0 ps-0 mt-0 me-0 ms-0">
               <div className="article-block article-block-title" id="0">
                 <h2>{t("resistance")}</h2>
                 <p className="article-date">
@@ -126,6 +127,8 @@ const Article = () => {
           </div>
         </div>
       </div>
+      <StyledSideFrameArticleMobile right={false} left={true} />
+      <StyledSideFrameArticleMobile right={true} left={false} />
     </StyledArticleSection>
   );
 };

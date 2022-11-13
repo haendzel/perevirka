@@ -1,4 +1,4 @@
-import { theme } from "../../theme/mainTheme";
+import { theme, device } from "../../theme/mainTheme";
 import styled from "styled-components";
 
 export const StyledHeaderLink = styled.button`
@@ -6,7 +6,8 @@ export const StyledHeaderLink = styled.button`
   background: transparent;
   padding: 7px 12px;
   line-height: 16px;
-  font-size: 13px;
+  font-size: 12px;
+  white-space: nowrap;
   border-radius: 30px;
   font-weight: 500;
   min-width: 30px;
@@ -16,6 +17,10 @@ export const StyledHeaderLink = styled.button`
   cursor: pointer;
   margin: 0 6px;
   transition: all 0.25s ease-in;
+
+  @media ${device.laptop13} {
+    font-size: 13px;
+  }
 
   &.is-active {
     box-shadow: inset 0 0 0 1px ${theme.black};

@@ -6,7 +6,26 @@ import LanguageDetector from "i18next-browser-languagedetector";
 const getUserLanguage = () =>
   window.navigator.userLanguage || window.navigator.language;
 
-const userLanguage = getUserLanguage();
+const checkLanguages = () => {
+  let userLanguage = getUserLanguage();
+  if (userLanguage === "pl-PL") {
+    return (userLanguage = "pl");
+  } else if (userLanguage === "en-US") {
+    return (userLanguage = "en");
+  } else if (userLanguage === "en-UK") {
+    return (userLanguage = "en");
+  } else if (userLanguage === "en-EN") {
+    return (userLanguage = "en");
+  } else if (userLanguage === "ua-UA") {
+    return (userLanguage = "ua");
+  } else if (userLanguage === "ru-RU") {
+    return (userLanguage = "ru");
+  } else if (userLanguage === "ru-UA") {
+    return (userLanguage = "ru");
+  } else {
+    return (userLanguage = "en");
+  }
+};
 
 i18n
   .use(initReactI18next)
@@ -64,7 +83,7 @@ i18n
       },
     },
     debug: true,
-    ng: `${userLanguage}`,
+    lng: checkLanguages(),
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,
