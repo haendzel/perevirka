@@ -27,6 +27,8 @@ const checkLanguages = () => {
   }
 };
 
+//const userLanguage = getUserLanguage();
+
 i18n
   .use(initReactI18next)
   .use(Backend)
@@ -83,7 +85,7 @@ i18n
       },
     },
     debug: true,
-    lng: checkLanguages(),
+    lng: localStorage.getItem("selectedLanguage"),
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

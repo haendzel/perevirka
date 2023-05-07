@@ -11,6 +11,10 @@ export const StyledDetailsArticle = styled.div`
     max-height: 400px;
     border-bottom: none;
 
+    @media ${device.laptop13} {
+      max-height: 100%;
+    }
+
     .article-block {
       &:last-child {
         border-bottom: none !important;
@@ -26,5 +30,6 @@ export const StyledDetailsArticle = styled.div`
 
   .content {
     max-height: 100%;
+    padding-bottom: 34px;
   }
 `;

@@ -24,14 +24,15 @@ const Header = () => {
     setLang(i18n.language);
   }, [lang]);
 
-  const { t } = useTranslation();
-
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
   };
 
+  const { t } = useTranslation();
+
   const changeLanguage = (lng) => {
-    //window.location.reload(false);
+    localStorage.setItem("selectedLanguage", lng);
+    window.location.reload(false);
     i18n.changeLanguage(lng);
   };
 

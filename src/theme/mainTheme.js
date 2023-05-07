@@ -218,6 +218,8 @@ export const GlobalStyle = createGlobalStyle`
 
   .navBarButton {
     border: none;
+    background: transparent;
+    color: ${theme.black} !important;
   }
 
   .menuNav {

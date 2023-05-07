@@ -27,6 +27,9 @@ const Article = () => {
   };
 
   useEffect(() => {
+    if (lng === "ua") {
+      lng = "uk";
+    }
     fetchArticle();
   }, [lng]);
 

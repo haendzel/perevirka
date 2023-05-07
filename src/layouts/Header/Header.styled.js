@@ -8,7 +8,7 @@ export const StyledHeader = styled.header`
   line-height: 40px;
   font-size: 14px;
   background-color: ${theme.primary};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
