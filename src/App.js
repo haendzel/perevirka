@@ -27,6 +27,40 @@ function App() {
 
   function fetchData() {
     fetch(
+      `https://serene-dusk-83995.herokuapp.com/api/tags?pagination[page]=1&pagination[pageSize]=9999&locale=${lng}&populate=*`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data?.data);
+        data.data?.map((item) => {
+          // const nodeLinks = linksArrayState.filter(
+          //   (link) => link.source === item.id || link.target === item.id
+          // );
+
+          item.id = item.attributes.name;
+          item.city = item.attributes.tag ? false : true;
+          item.organization = false;
+          item.group = item.attributes.tag ? 2 : 3;
+          item.value = getRandomInt(50);
+          // Add all links that have this node as a source or target to the links array of this node
+          //item.links = nodeLinks;
+          nodesArrayHelper.push(item);
+
+          const ids = nodesArrayHelper.map((o) => o.id);
+          const filteredArray = nodesArrayHelper.filter(
+            ({ id }, index) => !ids.includes(id, index + 1)
+          );
+
+          setGraphData({
+            nodes: nodesArrayHelper,
+            links: linksArrayHelper,
+          });
+        });
+      });
+
+    fetch(
       `https://serene-dusk-83995.herokuapp.com/api/nodes?pagination[page]=1&pagination[pageSize]=9999&locale=${lng}&populate=*`
     )
       .then((response) => {
@@ -54,46 +88,18 @@ function App() {
           );
 
           item.links = filteredLinks;
-          item.neighbors = filteredLinks.map((link) =>
-            link.target === item.id ? link.source : link.target
-          );
-        });
-
-        fetch(
-          `https://serene-dusk-83995.herokuapp.com/api/tags?pagination[page]=1&pagination[pageSize]=9999&locale=${lng}&populate=*`
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data?.data);
-            data.data?.map((item) => {
-              // const nodeLinks = linksArrayState.filter(
-              //   (link) => link.source === item.id || link.target === item.id
-              // );
-
-              item.id = item.attributes.name;
-              item.city = item.attributes.tag ? false : true;
-              item.organization = false;
-              item.group = item.attributes.tag ? 2 : 3;
-              item.value = getRandomInt(50);
-              // Add all links that have this node as a source or target to the links array of this node
-              //item.links = nodeLinks;
-              nodesArrayHelper.push(item);
-
-              const ids = nodesArrayHelper.map((o) => o.id);
-              const filteredArray = nodesArrayHelper.filter(
-                ({ id }, index) => !ids.includes(id, index + 1)
-              );
-
-              setGraphData({
-                nodes: nodesArrayHelper,
-                links: linksArrayHelper,
-              });
-
-              setIsBusy(false);
-            });
+          item.neighbors = filteredLinks.map((link) => {
+            console.log("filtrujemy tu", nodesArrayHelper);
+            const neighborNode = nodesArrayHelper.find(
+              (node) =>
+                node.id ===
+                (link.target === item.id ? link.source : link.target)
+            );
+            console.log(neighborNode);
+            return neighborNode ? neighborNode : null;
           });
+        });
+        setIsBusy(false);
       });
   }
 
@@ -104,21 +110,28 @@ function App() {
     if (isBusy) {
       fetchData();
     }
-  }, [lng]);
+  }, [lng, isBusy]);
 
   if (ready) {
     return (
       <React.StrictMode>
         <BrowserRouter>
           <GlobalStyle />
-          <Header />
+          {!isBusy && (
+            <>
+              <Header />
 
-          <Routes>
-            <Route path="/" element={<Home newGraphData={graphData} />} />
-            <Route path="/resistance-infrastructures" element={<Article />} />
-          </Routes>
+              <Routes>
+                <Route path="/" element={<Home newGraphData={graphData} />} />
+                <Route
+                  path="/resistance-infrastructures"
+                  element={<Article />}
+                />
+              </Routes>
 
-          <Footer />
+              <Footer />
+            </>
+          )}
         </BrowserRouter>
       </React.StrictMode>
     );

@@ -1,6 +1,7 @@
 import "../../App.css";
 import i18n from "../../i18n";
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import * as THREE from "three";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import SpriteText from "three-spritetext";
 import { StyledSideFrame } from "../../components/SideFrame/SideFrame.styled";
@@ -11,6 +12,10 @@ function Home({ newGraphData }) {
   const fgRef = useRef();
   const [activeNode, setActiveNode] = useState(null);
   const [graphData, setGraphData] = useState(newGraphData);
+  const [graphLoaded, setGraphLoaded] = useState(false);
+  const [highlightNodes, setHighlightNodes] = useState(new Set());
+  const [highlightLinks, setHighlightLinks] = useState(new Set());
+  const [selection, setSelection] = React.useState("");
   let lng = i18n.language;
   let threeNodes = [];
 
@@ -51,58 +56,44 @@ function Home({ newGraphData }) {
       b.links.push(link);
     });
 
-    const highlightNodes = new Set();
-    const highlightLinks = new Set();
     let hoverNode = null;
 
     const Graph = ForceGraph3D()(graphRef.current)
       .graphData(graphData)
-      .nodeColor((node) =>
-        highlightNodes.has(node)
-          ? node === hoverNode
-            ? "rgb(255,0,0,1)"
-            : "rgba(255,160,0,0.8)"
-          : "rgba(0,255,255,0.6)"
-      )
+      .linkOpacity(0.5)
+
       .linkDirectionalParticles(0)
-      .linkWidth((link) => (highlightLinks.has(link) ? 4 : 1))
-      .linkDirectionalParticles((link) => (highlightLinks.has(link) ? 4 : 0))
-      .linkDirectionalParticleWidth(2)
-      .linkOpacity(0.2)
+      .linkWidth((link) => (highlightLinks.has(link) ? 1 : 1))
+      .linkDirectionalParticles((link) => (highlightLinks.has(link) ? 1 : 0))
+      .linkDirectionalParticleWidth(0)
+      .linkColor((link) =>
+        highlightLinks.has(link) ? `#808080` : `rgba(180, 180, 180, 0.1)`
+      )
+      .onEngineTick(() => setGraphLoaded(true))
       .onNodeDragEnd((node) => {
         node.fx = node.x;
         node.fy = node.y;
         node.fz = node.z;
       })
-      .nodeThreeObject((node) => {
-        const sprite = new SpriteText(node.id);
-        sprite.color = "#000";
-        sprite.fontFace = "Inter";
-        sprite.fontWeight = "500";
-        sprite.textHeight = 6;
 
-        if (node.city) {
-          sprite.color = "#E0E0E0";
-        } else if (node.organization) {
-          sprite.color = "#FE6C2D";
-        } else {
-          sprite.color = "#808080";
-        }
-
-        return sprite;
-      })
       .nodeAutoColorBy("group")
       .onNodeClick((node) => {
         // no state change
-        if ((!node && !highlightNodes.size) || (node && hoverNode === node))
+        const newHighlightNodes = new Set(highlightNodes);
+        const newHighlightLinks = new Set(highlightLinks);
+        if ((!node && !newHighlightNodes.size) || (node && hoverNode === node))
           return;
 
-        highlightNodes.clear();
-        highlightLinks.clear();
+        newHighlightNodes.clear();
+        newHighlightLinks.clear();
         if (node) {
-          highlightNodes.add(node);
-          node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
-          node.links.forEach((link) => highlightLinks.add(link));
+          newHighlightNodes.add(node);
+          node.neighbors.forEach((neighbor) => newHighlightNodes.add(neighbor));
+          node.links.forEach((link) => newHighlightLinks.add(link));
+          setSelection(node);
+          setActiveNode(node);
+          setHighlightLinks(newHighlightLinks);
+          setHighlightNodes(newHighlightNodes);
         }
 
         hoverNode = node || null;
@@ -124,16 +115,58 @@ function Home({ newGraphData }) {
           node, // lookAt ({ x, y, z })
           3000 // ms transition duration
         );
-
         updateHighlight(node);
         handleClick(node);
+      })
+
+      .nodeThreeObject((node) => {
+        const sprite = new SpriteText(node.id);
+        sprite.color = "#000";
+        sprite.fontFace = "Inter";
+        sprite.fontWeight = "500";
+        sprite.textHeight = 6;
+
+        // if (node.city) {
+        //   sprite.color = highlightNodes.has(node)
+        //     ? `"#E0E0E0"`
+        //     : `rgba(180, 180, 180, 0.25)`;
+        // } else if (node.organization) {
+        //   sprite.color = highlightNodes.has(node)
+        //     ? node === activeNode
+        //       ? "rgb(255,0,0,1)"
+        //       : "rgba(255,160,0,0.8)"
+        //     : "rgba(0,255,255,0.6)";
+        // } else {
+        //   sprite.color = highlightNodes.has(node)
+        //     ? `#808080`
+        //     : `rgba(224, 224, 224, 0.25)`;
+        // }
+
+        sprite.color = highlightNodes.has(node)
+          ? node === activeNode
+            ? "#FE6C2D"
+            : "rgba(224, 224, 224, 1)"
+          : "rgba(128, 128, 128, 0.33)";
+        return sprite;
       });
 
     function updateHighlight(node) {
       // trigger update of highlighted objects in scene
       Graph.nodeColor(Graph.nodeColor())
         .linkWidth(Graph.linkWidth())
-        .linkDirectionalParticles(Graph.linkDirectionalParticles());
+        .linkDirectionalParticles(Graph.linkDirectionalParticles())
+        .nodeThreeObject(() => {
+          const sprite = new SpriteText(node.id);
+          sprite.fontFace = "Inter";
+          sprite.fontWeight = "500";
+          sprite.textHeight = 7;
+          sprite.color = highlightNodes.has(node)
+            ? node === activeNode
+              ? "#FE6C2D"
+              : "rgba(224, 224, 224, 1)"
+            : "rgba(128, 128, 128, 0.1)";
+          return sprite;
+        });
     }
 
     return () => {
@@ -141,7 +174,7 @@ function Home({ newGraphData }) {
       Graph.graphData({ nodes: [], links: [] });
       Graph.graphData(graphData);
     };
-  }, [lng, graphData]);
+  }, [lng, graphData, highlightNodes, highlightLinks, activeNode]);
 
   const handleClick = useCallback(
     (node) => {
@@ -154,7 +187,7 @@ function Home({ newGraphData }) {
             btn.classList.remove("active");
           });
 
-          const distance = 70;
+          const distance = 150;
           const distRatio =
             1 + distance / Math.hypot(node?.x, node?.y, node?.z);
           setActiveNode(node);
@@ -176,13 +209,14 @@ function Home({ newGraphData }) {
           document.querySelector(".menu-item.active").dataset.node;
         console.log("active node from dom: ", activeNodeFromDOM);
         console.log("threeNodes: ", threeNodes);
+        setActiveNode(node);
         if (activeNodeFromDOM !== null) {
           var items = threeNodes.filter(
             (item) => item.id === activeNodeFromDOM
           );
           var item = items[0];
           console.log(item);
-          const distance = 70;
+          const distance = 150;
           const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
           if (fgRef.current) {
             fgRef.current.cameraPosition(
@@ -198,7 +232,7 @@ function Home({ newGraphData }) {
         }
       }
     },
-    [fgRef]
+    [graphRef]
   );
 
   return (
@@ -210,36 +244,7 @@ function Home({ newGraphData }) {
         handleClick={handleClick}
       />
 
-      {/* <ForceGraph3D
-        ref={fgRef}
-        distance={100}
-        forceEngine={"d3"}
-        dagLevelDistance={10}
-        width={window.innerWidth}
-        graphData={data}
-        nodeAutoColorBy="group"
-        backgroundColor="#000"
-        linkColor={colorForLinks}
-        onNodeClick={handleClick}
-        showNavInfo={false}
-        nodeThreeObject={(node) => {
-          const sprite = new SpriteText(node.id);
-          sprite.color = "#000";
-          sprite.fontFace = "Inter";
-          sprite.fontWeight = "500";
-          sprite.textHeight = 6;
-
-          if (node.city) {
-            sprite.color = "#E0E0E0";
-          } else if (node.organization) {
-            sprite.color = "#FE6C2D";
-          } else {
-            sprite.color = "#808080";
-          }
-
-          return sprite;
-        }}
-      /> */}
+      {}
 
       <div ref={graphRef} />
 
