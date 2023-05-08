@@ -1,3 +1,3 @@
 # Perevirka App
 
-https://haendzel.github.io/perevirka/
+https://perevirka.com/
