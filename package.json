@@ -1,8 +1,8 @@
 {
   "name": "perevirka",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
-  "homepage": "https://perevirka.com",
+  "homepage": "https://haendzel.github.io/perevirka/",
   "dependencies": {
     "3d-force-graph": "^1.71.4",
     "@react-hook/window-size": "^3.1.1",

@@ -88,8 +88,8 @@ function Home({ newGraphData }) {
         newHighlightLinks.clear();
         if (node) {
           newHighlightNodes.add(node);
-          node.neighbors.forEach((neighbor) => newHighlightNodes.add(neighbor));
-          node.links.forEach((link) => newHighlightLinks.add(link));
+          node.neighbors?.forEach((neighbor) => newHighlightNodes.add(neighbor));
+          node.links?.forEach((link) => newHighlightLinks.add(link));
           setSelection(node);
           setActiveNode(node);
           setHighlightLinks(newHighlightLinks);
@@ -117,41 +117,29 @@ function Home({ newGraphData }) {
         );
         updateHighlight(node);
         handleClick(node);
+        console.log(node);
       })
 
       .nodeThreeObject((node) => {
+        console.log(node);
+        console.log(activeNode);
+        console.log(highlightNodes.has(node));
         const sprite = new SpriteText(node.id);
         sprite.color = "#000";
         sprite.fontFace = "Inter";
         sprite.fontWeight = "500";
         sprite.textHeight = 6;
-
-        // if (node.city) {
-        //   sprite.color = highlightNodes.has(node)
-        //     ? `"#E0E0E0"`
-        //     : `rgba(180, 180, 180, 0.25)`;
-        // } else if (node.organization) {
-        //   sprite.color = highlightNodes.has(node)
-        //     ? node === activeNode
-        //       ? "rgb(255,0,0,1)"
-        //       : "rgba(255,160,0,0.8)"
-        //     : "rgba(0,255,255,0.6)";
-        // } else {
-        //   sprite.color = highlightNodes.has(node)
-        //     ? `#808080`
-        //     : `rgba(224, 224, 224, 0.25)`;
-        // }
-
         sprite.color = highlightNodes.has(node)
-          ? node === activeNode
+          // ? node === activeNode
+          //   ? "#FE6C2D"
             ? "#FE6C2D"
-            : "rgba(224, 224, 224, 1)"
-          : "rgba(128, 128, 128, 0.33)";
+          : "rgba(224, 224, 224, 0.5)";
         return sprite;
       });
 
     function updateHighlight(node) {
       // trigger update of highlighted objects in scene
+      console.log(activeNode)
       Graph.nodeColor(Graph.nodeColor())
         .linkWidth(Graph.linkWidth())
         .linkDirectionalParticles(Graph.linkDirectionalParticles())
@@ -161,11 +149,11 @@ function Home({ newGraphData }) {
           sprite.fontWeight = "500";
           sprite.textHeight = 7;
           sprite.color = highlightNodes.has(node)
-            ? node === activeNode
-              ? "#FE6C2D"
-              : "rgba(224, 224, 224, 1)"
-            : "rgba(128, 128, 128, 0.1)";
-          return sprite;
+          ? node === activeNode
+            ? "#FE6C2D"
+            : "#808080"
+          : "rgba(224, 224, 224, 0.5)";
+        return sprite;
         });
     }
 

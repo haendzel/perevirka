@@ -19,10 +19,24 @@ function App() {
   let linksArrayHelper = [];
 
   let lng = i18n.language;
-  let threeNodes = [];
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
+  }
+
+  function getSourcesForTargetNode(nodes, connections, targetId) {
+    const targetNode = nodes.find((node) => node.id === targetId);
+    const targetNodeId = targetNode.id;
+    const sources = [];
+  
+    for (const connection of connections) {
+      if (connection.target === targetNodeId) {
+        const sourceNode = nodes.find((node) => node.id === connection.source);
+        sources.push(sourceNode);
+      }
+    }
+  
+    return sources;
   }
 
   function fetchData() {
@@ -33,7 +47,8 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log(data?.data);
+
+
         data.data?.map((item) => {
           // const nodeLinks = linksArrayState.filter(
           //   (link) => link.source === item.id || link.target === item.id
@@ -48,15 +63,12 @@ function App() {
           //item.links = nodeLinks;
           nodesArrayHelper.push(item);
 
+
           const ids = nodesArrayHelper.map((o) => o.id);
           const filteredArray = nodesArrayHelper.filter(
             ({ id }, index) => !ids.includes(id, index + 1)
           );
 
-          setGraphData({
-            nodes: nodesArrayHelper,
-            links: linksArrayHelper,
-          });
         });
       });
 
@@ -73,7 +85,7 @@ function App() {
           item.city = false;
           item.group = 1;
           nodesArrayHelper.push(item);
-          threeNodes.push(item);
+          // setRealNodes(prevArray => [...prevArray, item]);
 
           item.attributes.tags?.data.map((tag) => {
             linksArrayHelper.push({
@@ -99,8 +111,38 @@ function App() {
             return neighborNode ? neighborNode : null;
           });
         });
+      })
+      .then(() => { 
+
+        const newArray = nodesArrayHelper.map(obj => {
+          if(obj.organization === false) {
+            const sourcesForTargetNode = getSourcesForTargetNode(nodesArrayHelper, linksArrayHelper, obj.id);
+            const filteredLinks = linksArrayHelper.filter(
+              (link) => link.target === obj.id
+            );
+            return { ...obj, links: filteredLinks, neighbors: sourcesForTargetNode };
+          } else {
+            return { ...obj };
+          }
+        })
+
+        console.log('check', newArray, nodesArrayHelper, linksArrayHelper)
+
+        setGraphData({
+          nodes: newArray,
+          links: linksArrayHelper,
+        });
+
         setIsBusy(false);
-      });
+
+        // linksArrayHelper.map(obj => {
+        //   if(obj.source) {
+        //     console.log('halko')
+        //   }
+        // })
+  
+        // console.log('nowe', newArray, linksArrayHelper)
+      })
   }
 
   useEffect(() => {
@@ -109,6 +151,11 @@ function App() {
     }
     if (isBusy) {
       fetchData();
+    } else {
+      // const sourcesWithMieszkanieTarget = getSourcesWithTarget(graphData.links, 'granica');
+      // const sourcesWithJedzenieTarget = getSourcesWithTarget(graphData.links, 'zakwaterowanie');
+
+      // console.log('tut', sourcesWithJedzenieTarget, sourcesWithMieszkanieTarget);
     }
   }, [lng, isBusy]);
 
