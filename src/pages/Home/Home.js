@@ -121,19 +121,18 @@ function Home({ newGraphData }) {
       })
 
       .nodeThreeObject((node) => {
-        console.log(node);
-        console.log(activeNode);
-        console.log(highlightNodes.has(node));
+        const highlightArray = [];
+        highlightNodes.forEach(node => highlightArray.push(node.id));
+        console.log('highlightArray:', highlightArray);
+        console.log('activeNode:', activeNode.id);
         const sprite = new SpriteText(node.id);
-        sprite.color = "#000";
         sprite.fontFace = "Inter";
         sprite.fontWeight = "500";
         sprite.textHeight = 6;
-        sprite.color = highlightNodes.has(node)
-          // ? node === activeNode
-          //   ? "#FE6C2D"
-            ? "#FE6C2D"
-          : "rgba(224, 224, 224, 0.5)";
+        sprite.color = highlightArray.includes(node.id)
+        ? activeNode.id === node.id ? "#FE6C2D" : "#fff"
+        : "rgba(224, 224, 224, 0.5)";
+
         return sprite;
       });
 
@@ -142,19 +141,23 @@ function Home({ newGraphData }) {
       console.log(activeNode)
       Graph.nodeColor(Graph.nodeColor())
         .linkWidth(Graph.linkWidth())
-        .linkDirectionalParticles(Graph.linkDirectionalParticles())
-        .nodeThreeObject(() => {
-          const sprite = new SpriteText(node.id);
-          sprite.fontFace = "Inter";
-          sprite.fontWeight = "500";
-          sprite.textHeight = 7;
-          sprite.color = highlightNodes.has(node)
-          ? node === activeNode
-            ? "#FE6C2D"
-            : "#808080"
-          : "rgba(224, 224, 224, 0.5)";
-        return sprite;
-        });
+        .linkDirectionalParticles(Graph.linkDirectionalParticles());
+        // .nodeThreeObject(() => {
+        //   const highlightArray = [];
+        //   highlightNodes.forEach(node => highlightArray.push(node));
+        //   console.log('highlightArray:', highlightArray);
+        //   console.log('activeNode:', activeNode);
+        //   const sprite = new SpriteText(node.id);
+        //   sprite.color = "#000";
+        //   sprite.fontFace = "Inter";
+        //   sprite.fontWeight = "500";
+        //   sprite.textHeight = 6;
+        //   sprite.color = highlightArray.includes(node)
+        //     ? activeNode === node ? "#FE6C2D" : "#fff"
+        //     : "rgba(224, 224, 224, 0.5)";
+  
+        //   return sprite;
+        // });
     }
 
     return () => {
