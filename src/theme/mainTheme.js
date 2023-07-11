@@ -50,6 +50,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  * {
+    transition: all 0.25s ease;
+  }
+
   .container {
     width: 100%;
     max-width: 100%;
@@ -204,7 +208,7 @@ export const GlobalStyle = createGlobalStyle`
         transition: all 0.25s ease-in;
       }
     }
-      
+
   }
 
   .people-p {

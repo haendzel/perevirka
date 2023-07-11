@@ -15,13 +15,78 @@ function Home({ newGraphData }) {
   const [graphLoaded, setGraphLoaded] = useState(false);
   const [highlightNodes, setHighlightNodes] = useState(new Set());
   const [highlightLinks, setHighlightLinks] = useState(new Set());
+  const [clickedMenuItem, setClickedMenuItem] = useState(false);
   const [selection, setSelection] = React.useState("");
   let lng = i18n.language;
+  let hoverNode = null;
   let threeNodes = [];
+  let Graph = null;
 
   const colorForLinks = () => {
     return "#F9F9F9";
   };
+
+  function updateHighlight(node) {
+    // trigger update of highlighted objects in scene
+    console.log("what active node?", activeNode);
+    const newHighlightNodes = new Set(highlightNodes);
+    const newHighlightLinks = new Set(highlightLinks);
+    if ((!node && !newHighlightNodes.size) || (node && hoverNode === node))
+      return;
+
+    newHighlightNodes.clear();
+    newHighlightLinks.clear();
+    if (node) {
+      newHighlightNodes.add(node);
+      console.log("a tu taki node", node);
+      node.neighbors?.forEach((neighbor) => newHighlightNodes.add(neighbor));
+      node.links?.forEach((link) => newHighlightLinks.add(link));
+      setSelection(node);
+      setActiveNode(node);
+      setHighlightLinks(newHighlightLinks);
+      setHighlightNodes(newHighlightNodes);
+    }
+
+    hoverNode = node || null;
+
+    const distance = 10;
+    const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+    const newPos =
+      node.x || node.y || node.z
+        ? {
+            x: node.x * distRatio,
+            y: node.y * distRatio,
+            z: node.z * distRatio,
+          }
+        : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+
+    Graph.cameraPosition(
+      newPos, // new position
+      node, // lookAt ({ x, y, z })
+      3000 // ms transition duration
+    );
+    Graph.nodeColor(Graph.nodeColor())
+      .linkWidth(Graph.linkWidth())
+      .linkDirectionalParticles(Graph.linkDirectionalParticles())
+      .nodeThreeObject(() => {
+        const highlightArray = [];
+        highlightNodes.forEach((node) => highlightArray.push(node));
+        console.log("highlightArray:", highlightArray);
+        console.log(activeNode, "activenode");
+        const sprite = new SpriteText(node.id);
+        sprite.fontFace = "Inter";
+        sprite.fontWeight = "500";
+        sprite.textHeight = 7;
+        sprite.color = highlightArray.includes(node.id)
+          ? activeNode.id === node.id
+            ? "#FE6C2D"
+            : "#fff"
+          : "rgba(224, 224, 224, 0.5)";
+
+        return sprite;
+      });
+  }
 
   useEffect(() => {
     if (lng === "ua") {
@@ -56,12 +121,9 @@ function Home({ newGraphData }) {
       b.links.push(link);
     });
 
-    let hoverNode = null;
-
-    const Graph = ForceGraph3D()(graphRef.current)
-      .graphData(graphData)
+    Graph = ForceGraph3D()(graphRef.current)
+      .graphData(newGraphData)
       .linkOpacity(0.5)
-
       .linkDirectionalParticles(0)
       .linkWidth((link) => (highlightLinks.has(link) ? 1 : 1))
       .linkDirectionalParticles((link) => (highlightLinks.has(link) ? 1 : 0))
@@ -69,7 +131,7 @@ function Home({ newGraphData }) {
       .linkColor((link) =>
         highlightLinks.has(link) ? `#808080` : `rgba(180, 180, 180, 0.1)`
       )
-      .onEngineTick(() => setGraphLoaded(true))
+      // .onEngineTick(() => setGraphLoaded(true))
       .onNodeDragEnd((node) => {
         node.fx = node.x;
         node.fy = node.y;
@@ -79,42 +141,7 @@ function Home({ newGraphData }) {
       .nodeAutoColorBy("group")
       .onNodeClick((node) => {
         // no state change
-        const newHighlightNodes = new Set(highlightNodes);
-        const newHighlightLinks = new Set(highlightLinks);
-        if ((!node && !newHighlightNodes.size) || (node && hoverNode === node))
-          return;
-
-        newHighlightNodes.clear();
-        newHighlightLinks.clear();
-        if (node) {
-          newHighlightNodes.add(node);
-          node.neighbors?.forEach((neighbor) => newHighlightNodes.add(neighbor));
-          node.links?.forEach((link) => newHighlightLinks.add(link));
-          setSelection(node);
-          setActiveNode(node);
-          setHighlightLinks(newHighlightLinks);
-          setHighlightNodes(newHighlightNodes);
-        }
-
-        hoverNode = node || null;
-
-        const distance = 150;
-        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
-
-        const newPos =
-          node.x || node.y || node.z
-            ? {
-                x: node.x * distRatio,
-                y: node.y * distRatio,
-                z: node.z * distRatio,
-              }
-            : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
-
-        Graph.cameraPosition(
-          newPos, // new position
-          node, // lookAt ({ x, y, z })
-          3000 // ms transition duration
-        );
+        setClickedMenuItem(false);
         updateHighlight(node);
         handleClick(node);
         console.log(node);
@@ -122,50 +149,79 @@ function Home({ newGraphData }) {
 
       .nodeThreeObject((node) => {
         const highlightArray = [];
-        highlightNodes.forEach(node => highlightArray.push(node.id));
-        console.log('highlightArray:', highlightArray);
-        console.log('activeNode:', activeNode.id);
+        highlightNodes.forEach((node) => highlightArray.push(node.id));
         const sprite = new SpriteText(node.id);
         sprite.fontFace = "Inter";
         sprite.fontWeight = "500";
-        sprite.textHeight = 6;
+        sprite.textHeight = 7;
         sprite.color = highlightArray.includes(node.id)
-        ? activeNode.id === node.id ? "#FE6C2D" : "#fff"
-        : "rgba(224, 224, 224, 0.5)";
+          ? activeNode.id === node.id
+            ? "#FE6C2D"
+            : "#fff"
+          : node.attributes.organization
+          ? "rgba(255, 251, 169, 0.33)" // Color for node with organization attribute
+          : node.attributes.city
+          ? "rgba(139, 128, 251, 0.33)" // Color for node with city attribute
+          : "rgba(224, 224, 224, 0.25)"; // Default color
 
         return sprite;
       });
 
     function updateHighlight(node) {
       // trigger update of highlighted objects in scene
-      console.log(activeNode)
-      Graph.nodeColor(Graph.nodeColor())
-        .linkWidth(Graph.linkWidth())
-        .linkDirectionalParticles(Graph.linkDirectionalParticles());
-        // .nodeThreeObject(() => {
-        //   const highlightArray = [];
-        //   highlightNodes.forEach(node => highlightArray.push(node));
-        //   console.log('highlightArray:', highlightArray);
-        //   console.log('activeNode:', activeNode);
-        //   const sprite = new SpriteText(node.id);
-        //   sprite.color = "#000";
-        //   sprite.fontFace = "Inter";
-        //   sprite.fontWeight = "500";
-        //   sprite.textHeight = 6;
-        //   sprite.color = highlightArray.includes(node)
-        //     ? activeNode === node ? "#FE6C2D" : "#fff"
-        //     : "rgba(224, 224, 224, 0.5)";
-  
-        //   return sprite;
-        // });
+      console.log("what active node?", activeNode);
+      const newHighlightNodes = new Set(highlightNodes);
+      const newHighlightLinks = new Set(highlightLinks);
+      if ((!node && !newHighlightNodes.size) || (node && hoverNode === node))
+        return;
+
+      newHighlightNodes.clear();
+      newHighlightLinks.clear();
+      if (node) {
+        newHighlightNodes.add(node);
+        console.log("a tu taki node", node);
+        node.neighbors?.forEach((neighbor) => newHighlightNodes.add(neighbor));
+        node.links?.forEach((link) => newHighlightLinks.add(link));
+        setSelection(node);
+        setActiveNode(node);
+        setHighlightLinks(newHighlightLinks);
+        setHighlightNodes(newHighlightNodes);
+      }
+
+      hoverNode = node || null;
+
+      const distance = 10;
+      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+      const newPos =
+        node.x || node.y || node.z
+          ? {
+              x: node.x * distRatio,
+              y: node.y * distRatio,
+              z: node.z * distRatio,
+            }
+          : { x: 0, y: 0, z: 10 }; // special case if node is in (0,0,0)
+
+      Graph.cameraPosition(
+        newPos, // new position
+        node, // lookAt ({ x, y, z })
+        1000 // ms transition duration
+      );
     }
 
     return () => {
       Graph.pauseAnimation();
       Graph.graphData({ nodes: [], links: [] });
-      Graph.graphData(graphData);
+      Graph.graphData(newGraphData);
     };
-  }, [lng, graphData, highlightNodes, highlightLinks, activeNode]);
+  }, [
+    lng,
+    graphData,
+    newGraphData,
+    highlightNodes,
+    highlightLinks,
+    activeNode,
+  ]);
 
   const handleClick = useCallback(
     (node) => {
@@ -178,10 +234,31 @@ function Home({ newGraphData }) {
             btn.classList.remove("active");
           });
 
-          const distance = 150;
+          const newHighlightNodes = new Set(highlightNodes);
+          const newHighlightLinks = new Set(highlightLinks);
+
+          // if ((!node && !newHighlightNodes.size) || node) return;
+
+          newHighlightNodes.clear();
+          newHighlightLinks.clear();
+
+          if (node) {
+            newHighlightNodes.add(node);
+            console.log("a tu taki node", node);
+            node.neighbors?.forEach((neighbor) =>
+              newHighlightNodes.add(neighbor)
+            );
+            node.links?.forEach((link) => newHighlightLinks.add(link));
+            setSelection(node);
+            setActiveNode(node);
+            setHighlightLinks(newHighlightLinks);
+            setHighlightNodes(newHighlightNodes);
+            updateHighlight(node);
+          }
+
+          const distance = 10;
           const distRatio =
             1 + distance / Math.hypot(node?.x, node?.y, node?.z);
-          setActiveNode(node);
           console.log(node);
           if (fgRef.current) {
             fgRef.current.cameraPosition(
@@ -191,35 +268,68 @@ function Home({ newGraphData }) {
                 z: node.z * distRatio,
               },
               node,
-              3000
+              10
             );
           }
+        } else {
+          console.log(graphData, node);
+          const desiredObject = graphData?.nodes.find(
+            (obj) => obj.id === node.attributes.name
+          );
+          console.log("dupa", desiredObject);
+          setActiveNode(desiredObject);
+          updateHighlight(desiredObject);
         }
       } else {
-        let activeNodeFromDOM =
-          document.querySelector(".menu-item.active").dataset.node;
+        let activeNodeFromDOM;
+        if (document.querySelector(".menu-item.active").dataset.node) {
+          activeNodeFromDOM =
+            document.querySelector(".menu-item.active").dataset.node;
+        }
         console.log("active node from dom: ", activeNodeFromDOM);
         console.log("threeNodes: ", threeNodes);
         setActiveNode(node);
+        setClickedMenuItem(true);
+        updateHighlight(node);
         if (activeNodeFromDOM !== null) {
           var items = threeNodes.filter(
             (item) => item.id === activeNodeFromDOM
           );
           var item = items[0];
           console.log(item);
-          const distance = 150;
-          const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
-          if (fgRef.current) {
-            fgRef.current.cameraPosition(
-              {
-                x: item.x * distRatio,
-                y: item.y * distRatio,
-                z: item.z * distRatio,
-              },
-              item,
-              3000
+
+          const newHighlightNodes = new Set(highlightNodes);
+          const newHighlightLinks = new Set(highlightLinks);
+
+          newHighlightNodes.clear();
+          newHighlightLinks.clear();
+
+          if (item) {
+            newHighlightNodes.add(item);
+            console.log("a tu taki node", item);
+            item.neighbors?.forEach((neighbor) =>
+              newHighlightNodes.add(neighbor)
             );
+            item.links?.forEach((link) => newHighlightLinks.add(link));
+            setSelection(item);
+            setActiveNode(item);
+            setHighlightLinks(newHighlightLinks);
+            setHighlightNodes(newHighlightNodes);
+            updateHighlight(item);
           }
+          // const distance = 10;
+          // const distRatio = 1 + distance / Math.hypot(item.x, item.y, item.z);
+          // if (fgRef.current) {
+          //   fgRef.current.cameraPosition(
+          //     {
+          //       x: item.x * distRatio,
+          //       y: item.y * distRatio,
+          //       z: item.z * distRatio,
+          //     },
+          //     item,
+          //     10
+          //   );
+          // }
         }
       }
     },
@@ -231,6 +341,7 @@ function Home({ newGraphData }) {
       <StyledSideFrame left={true} right={false} />
       <SideMenu
         activeNode={activeNode}
+        graphData={graphData}
         changeMenuNode={(menuNode) => setActiveNode(menuNode)}
         handleClick={handleClick}
       />

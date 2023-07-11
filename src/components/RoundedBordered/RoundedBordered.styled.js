@@ -16,6 +16,14 @@ export const StyledRoundedBordered = styled.a`
   text-align: center;
   cursor: pointer;
 
+  &.tag {
+    &:hover {
+      background-color: ${theme.black} !important;
+      border: 1px solid ${theme.black};
+      color: ${theme.white};
+    }
+  }
+
   @media ${device.tablet} {
     margin: 0 24px;
   }

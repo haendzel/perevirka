@@ -45,10 +45,10 @@ const Article = () => {
               ></div>
             </div>
           </div>
-          <div className="col-xl-7 article-col p-0">
+          <div className="col-xl-7 col-xxxl-8 article-col p-0">
             <article className="pt-0 pl-0 pe-0 ps-0 mt-0 me-0 ms-0">
               <div className="article-block article-block-title" id="0">
-                <h2>{t("resistance")}</h2>
+                <h2>{t("essay")}</h2>
                 <p className="article-date">
                   {moment(article?.attributes?.publishedAt).format(
                     "DD.MM.yyyy"
@@ -122,7 +122,7 @@ const Article = () => {
               })}
             </article>
           </div>
-          <div className="col-xl-3 p-0 m-0">
+          <div className="col-xl-3 col-xxxl-2 p-0 m-0">
             <SideMenuArticle
               activeNode={activeNode}
               changeMenuNode={(menuNode) => setActiveNode(menuNode)}

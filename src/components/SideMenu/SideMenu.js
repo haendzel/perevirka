@@ -11,7 +11,7 @@ import DetailsTab from "../DetailsTab/DetailsTab";
 import { StyledDetailsTabs } from "../DetailsTabs/DetailsTabs.styled";
 import { ReactComponent as SocialIcon } from "../../assets/icons/arrow-up.svg";
 
-const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
+const SideMenu = ({ changeMenuNode, activeNode, handleClick, graphData }) => {
   const [menuNode, setMenuNode] = useState(null);
   const [aboutUs, setAboutUs] = useState(null);
   const { t, i18n, ready } = useTranslation();
@@ -35,6 +35,7 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
     if (lng === "ua") {
       lng = "uk";
     }
+    console.log(activeNode);
     fetchAboutUs();
     changeMenuNode(menuNode);
   }, [lng, menuNode]);
@@ -43,14 +44,20 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
     return (
       <StyledSideMenu>
         <MenuList
+          graphData={graphData}
           activeNode={activeNode}
           changeNode={(menuNode) => setMenuNode(menuNode)}
           handleClick={handleClick}
         />
         <DetailsWrapper>
-          {menuNode?.id && (
+          {activeNode?.attributes?.tags && (
             <>
-              <DetailsTags node={activeNode} handleClick={handleClick} />
+              <DetailsTags
+                node={activeNode}
+                changeNode={(menuNode) => setMenuNode(menuNode)}
+                handleClick={handleClick}
+              />
+
               <DetailsArticle node={activeNode} />
               <StyledDetailsTabs>
                 <DetailsTab>
@@ -100,8 +107,7 @@ const SideMenu = ({ changeMenuNode, activeNode, handleClick }) => {
               </StyledDetailsTabs>
             </>
           )}
-
-          {menuNode === "First item" && <DetailsAboutUs aboutUs={aboutUs} />}
+          {activeNode === "First item" && <DetailsAboutUs aboutUs={aboutUs} />}
         </DetailsWrapper>
       </StyledSideMenu>
     );

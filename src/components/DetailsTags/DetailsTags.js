@@ -2,7 +2,7 @@ import React from "react";
 import RoundedBordered from "../RoundedBordered/RoundedBordered";
 import { StyledDetailsTags } from "./DetailsTags.styled";
 
-const DetailsTags = ({ node, handleClick }) => {
+const DetailsTags = ({ node, handleClick, changeNode }) => {
   let tags = [];
   if (node) {
     tags = node.attributes?.tags?.data;
@@ -10,13 +10,17 @@ const DetailsTags = ({ node, handleClick }) => {
   return (
     <StyledDetailsTags className="tags">
       {tags?.map((item, index) =>
-        item.attributes.tag ? (
+        item ? (
           <RoundedBordered
+            className="tag"
             type="tag"
             key={index}
-            node={item.attributes?.name}
-            data-node={item.attributes?.name}
-            handleClick={handleClick}
+            node={item}
+            data-node={item}
+            handleClick={() => {
+              handleClick(item);
+            }}
+            onClick={(item) => changeNode(item)}
           >
             {item.attributes?.name}
           </RoundedBordered>

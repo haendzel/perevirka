@@ -8,7 +8,7 @@ import { StyledButton } from "./MenuListItem/MenuListItem.styled";
 import Tooltip from "react-bootstrap/Tooltip";
 import RoundedBordered from "../RoundedBordered/RoundedBordered";
 
-const MenuList = ({ changeNode, activeNode, handleClick }) => {
+const MenuList = ({ changeNode, activeNode, handleClick, graphData }) => {
   const { t } = useTranslation();
   const [nodes, setNodes] = useState([]);
   const [thisNode, setThisNode] = useState({});
@@ -24,12 +24,27 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         return response.json();
       })
       .then((data) => {
-        setNodes(
-          data?.data.sort((a, b) =>
-            a.attributes.node_id.localeCompare(b.attributes.node_id)
-          )
-        );
-        console.log(nodes);
+        // const modifiedData = data?.data.map((item) => {
+        //   return {
+        //     ...item,
+        //     id: item.attributes.node_id,
+        //   };
+        // });
+        // setNodes(
+        //   modifiedData?.sort((a, b) =>
+        //     a.attributes.node_id.localeCompare(b.attributes.node_id)
+        //   )
+        // );
+
+        if (graphData) {
+          const someNodes = graphData?.nodes.map((item) => {
+            return {
+              ...item,
+            };
+          });
+
+          setNodes(someNodes?.sort((a, b) => a.id.localeCompare(b.id)));
+        }
       });
   };
 
@@ -51,11 +66,12 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
     });
 
     e.target.parentElement.classList.add("active");
-    console.log("call to nodes", node);
+    const matchingObject = graphData.nodes.find((obj) => obj.id === node.id);
+    console.log("matching object", matchingObject);
 
-    changeNode(node);
-    setThisNode(node);
-    handleClick();
+    changeNode(matchingObject);
+    setThisNode(matchingObject);
+    handleClick(matchingObject);
   };
 
   const renderTooltip = (props, title) => {
@@ -78,9 +94,9 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
   };
 
   const getOrganizations = (node, index) => {
-    var nodeStringLength = node.attributes.node_id.length;
+    var nodeStringLength = node.id.length;
     if (node.attributes.organization === true) {
-      if (node.attributes.node_id.length > 14) {
+      if (node.id.length > 14) {
         return (
           <OverlayTrigger
             placement="top"
@@ -90,7 +106,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
           >
             <StyledButton
               className="menu-item"
-              active={checkIndex(index)}
+              active={activeNode.id === node.id ? 1 : 0}
               index={index + 1}
               ref={ref}
               data-node={node.attributes.node_id}
@@ -118,7 +134,7 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
         return (
           <StyledButton
             className="menu-item"
-            active={checkIndex(index)}
+            active={activeNode.id === node.id ? 1 : 0}
             index={index + 1}
             ref={ref}
             key={node.attributes.node_id}
@@ -156,7 +172,8 @@ const MenuList = ({ changeNode, activeNode, handleClick }) => {
       setFirstTime(false);
     }
     fetchData();
-    setThisNode(activeNode);
+    //getNodes();
+    //setThisNode(activeNode);
   }, [thisNode, lng]);
 
   return (

@@ -52,11 +52,11 @@ const Header = () => {
               </div>
               <NavLink
                 className="d-none d-xl-block"
-                to="/resistance-infrastructures"
+                to="/essay"
                 activeClassName="is-active-header-tab"
               >
                 <HeaderLink className="header-link">
-                  {t("resistance")}
+                  {t("essay")}
                 </HeaderLink>
               </NavLink>
             </div>
@@ -138,11 +138,11 @@ const Header = () => {
         </div>
         <li>
           <NavLink
-            to="/resistance-infrastructures"
+            to="/essay"
             activeClassName="is-active-header-tab"
             onClick={() => closeMenu()}
           >
-            <HeaderLink className="header-link">{t("resistance")}</HeaderLink>
+            <HeaderLink className="header-link">{t("essay")}</HeaderLink>
           </NavLink>
         </li>
       </ul>

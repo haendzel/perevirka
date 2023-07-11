@@ -28,14 +28,14 @@ function App() {
     const targetNode = nodes.find((node) => node.id === targetId);
     const targetNodeId = targetNode.id;
     const sources = [];
-  
+
     for (const connection of connections) {
       if (connection.target === targetNodeId) {
         const sourceNode = nodes.find((node) => node.id === connection.source);
         sources.push(sourceNode);
       }
     }
-  
+
     return sources;
   }
 
@@ -112,7 +112,7 @@ function App() {
           });
         });
       })
-      .then(() => { 
+      .then(() => {
 
         const newArray = nodesArrayHelper.map(obj => {
           if(obj.organization === false) {
@@ -140,7 +140,7 @@ function App() {
         //     console.log('halko')
         //   }
         // })
-  
+
         // console.log('nowe', newArray, linksArrayHelper)
       })
   }
@@ -171,7 +171,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home newGraphData={graphData} />} />
                 <Route
-                  path="/resistance-infrastructures"
+                  path="/essay"
                   element={<Article />}
                 />
               </Routes>

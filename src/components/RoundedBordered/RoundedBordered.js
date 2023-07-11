@@ -6,7 +6,7 @@ const RoundedBordered = ({ type, children, url, handleClick, node }) => {
     <StyledRoundedBordered
       className={`${type}`}
       to={url}
-      onClick={handleClick}
+      onClick={(node) => handleClick(node)}
       data-node={node}
     >
       {children}
