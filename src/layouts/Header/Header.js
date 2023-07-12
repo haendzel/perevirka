@@ -32,7 +32,6 @@ const Header = () => {
 
   const changeLanguage = (lng) => {
     localStorage.setItem("selectedLanguage", lng);
-    window.location.reload(false);
     i18n.changeLanguage(lng);
   };
 
@@ -55,9 +54,7 @@ const Header = () => {
                 to="/essay"
                 activeClassName="is-active-header-tab"
               >
-                <HeaderLink className="header-link">
-                  {t("essay")}
-                </HeaderLink>
+                <HeaderLink className="header-link">{t("essay")}</HeaderLink>
               </NavLink>
             </div>
             <button

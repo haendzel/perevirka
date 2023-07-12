@@ -47,8 +47,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-
-
         data.data?.map((item) => {
           // const nodeLinks = linksArrayState.filter(
           //   (link) => link.source === item.id || link.target === item.id
@@ -63,12 +61,10 @@ function App() {
           //item.links = nodeLinks;
           nodesArrayHelper.push(item);
 
-
           const ids = nodesArrayHelper.map((o) => o.id);
           const filteredArray = nodesArrayHelper.filter(
             ({ id }, index) => !ids.includes(id, index + 1)
           );
-
         });
       });
 
@@ -113,20 +109,27 @@ function App() {
         });
       })
       .then(() => {
-
-        const newArray = nodesArrayHelper.map(obj => {
-          if(obj.organization === false) {
-            const sourcesForTargetNode = getSourcesForTargetNode(nodesArrayHelper, linksArrayHelper, obj.id);
+        const newArray = nodesArrayHelper.map((obj) => {
+          if (obj.organization === false) {
+            const sourcesForTargetNode = getSourcesForTargetNode(
+              nodesArrayHelper,
+              linksArrayHelper,
+              obj.id
+            );
             const filteredLinks = linksArrayHelper.filter(
               (link) => link.target === obj.id
             );
-            return { ...obj, links: filteredLinks, neighbors: sourcesForTargetNode };
+            return {
+              ...obj,
+              links: filteredLinks,
+              neighbors: sourcesForTargetNode,
+            };
           } else {
             return { ...obj };
           }
-        })
+        });
 
-        console.log('check', newArray, nodesArrayHelper, linksArrayHelper)
+        console.log("check", newArray, nodesArrayHelper, linksArrayHelper);
 
         setGraphData({
           nodes: newArray,
@@ -142,7 +145,7 @@ function App() {
         // })
 
         // console.log('nowe', newArray, linksArrayHelper)
-      })
+      });
   }
 
   useEffect(() => {
@@ -154,7 +157,6 @@ function App() {
     } else {
       // const sourcesWithMieszkanieTarget = getSourcesWithTarget(graphData.links, 'granica');
       // const sourcesWithJedzenieTarget = getSourcesWithTarget(graphData.links, 'zakwaterowanie');
-
       // console.log('tut', sourcesWithJedzenieTarget, sourcesWithMieszkanieTarget);
     }
   }, [lng, isBusy]);
@@ -170,10 +172,7 @@ function App() {
 
               <Routes>
                 <Route path="/" element={<Home newGraphData={graphData} />} />
-                <Route
-                  path="/essay"
-                  element={<Article />}
-                />
+                <Route path="/essay" element={<Article />} />
               </Routes>
 
               <Footer />

@@ -9,30 +9,28 @@ const getUserLanguage = () =>
 const checkLanguages = () => {
   let userLanguage = getUserLanguage();
   if (userLanguage === "pl-PL") {
-    return (userLanguage = "pl");
-  } else if (userLanguage === "en-US") {
-    return (userLanguage = "en");
-  } else if (userLanguage === "en-UK") {
-    return (userLanguage = "en");
-  } else if (userLanguage === "en-EN") {
-    return (userLanguage = "en");
+    return "pl";
+  } else if (
+    userLanguage === "en-US" ||
+    userLanguage === "en-UK" ||
+    userLanguage === "en-EN"
+  ) {
+    return "en";
   } else if (userLanguage === "ua-UA") {
-    return (userLanguage = "ua");
-  } else if (userLanguage === "ru-RU") {
-    return (userLanguage = "ru");
-  } else if (userLanguage === "ru-UA") {
-    return (userLanguage = "ru");
+    return "ua";
+  } else if (userLanguage === "ru-RU" || userLanguage === "ru-UA") {
+    return "ru";
   } else {
-    return (userLanguage = "en");
+    return "en";
   }
 };
 
-//const userLanguage = getUserLanguage();
+const selectedLanguage = checkLanguages();
 
 i18n
-  .use(initReactI18next)
   .use(Backend)
   .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
     resources: {
       en: {
@@ -85,7 +83,7 @@ i18n
       },
     },
     debug: true,
-    lng: localStorage.getItem("selectedLanguage"),
+    lng: selectedLanguage,
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

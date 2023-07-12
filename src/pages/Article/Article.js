@@ -50,8 +50,12 @@ const Article = () => {
               <div className="article-block article-block-title" id="0">
                 <h2>{t("essay")}</h2>
                 <p className="article-date">
-                  {moment(article?.attributes?.publishedAt).format(
-                    "DD.MM.yyyy"
+                  {article?.attributes.publishedAt && (
+                    <>
+                      {moment(article?.attributes?.publishedAt).format(
+                        "DD.MM.yyyy"
+                      )}
+                    </>
                   )}
                 </p>
               </div>
