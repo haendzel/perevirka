@@ -7,7 +7,7 @@ const getUserLanguage = () =>
   window.navigator.userLanguage || window.navigator.language;
 
 const checkLanguages = () => {
-  let userLanguage = getUserLanguage();
+  let userLanguage = localStorage.getItem("i18nextLng");
   if (userLanguage === "pl-PL") {
     return (userLanguage = "pl");
   } else if (userLanguage === "en-US") {
@@ -87,8 +87,7 @@ i18n
       },
     },
     debug: true,
-    // lng: checkLanguages(),
-    lng: localStorage.getItem("selectedLanguage"),
+    lng: checkLanguages(),
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

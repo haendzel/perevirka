@@ -14,7 +14,6 @@ const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const { language } = useParams();
 
   const [lang, setLang] = useState("en");
 
@@ -33,9 +32,9 @@ const Header = () => {
   const { t } = useTranslation();
 
   const changeLanguage = (lng) => {
-    localStorage.setItem("selectedLanguage", lng);
+    localStorage.setItem("i18nextLng", lng);
     i18n.changeLanguage(lng);
-    window.location.reload(true);
+    //window.location.reload(true);
   };
 
   return (

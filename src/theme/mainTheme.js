@@ -220,6 +220,17 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
   }
 
+  article {
+  .article-block {
+    &.block-standard-heading-text {
+      img {
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+}
+
   .navBarButton {
     border: none;
     background: transparent;

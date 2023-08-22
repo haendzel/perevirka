@@ -19,6 +19,7 @@ function App() {
   let nodesArrayHelper = [];
   let linksArrayHelper = [];
   let lng = i18n.language;
+  let lang = localStorage.getItem('i18nextLng');
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -148,7 +149,7 @@ function App() {
       lng = "uk";
     }
     fetchData();
-  }, []);
+  }, [lng, lang]);
 
   if (ready) {
     return (
