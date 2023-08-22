@@ -14,10 +14,10 @@ import { GlobalStyle } from "./theme/mainTheme";
 function App() {
   const { ready } = useTranslation();
   const [isBusy, setIsBusy] = useState(true);
+  const [loadedApi, setLoadedApi] = useState(false);
   const [graphData, setGraphData] = useState();
   let nodesArrayHelper = [];
   let linksArrayHelper = [];
-
   let lng = i18n.language;
 
   function getRandomInt(max) {
@@ -44,9 +44,11 @@ function App() {
       `https://serene-dusk-83995.herokuapp.com/api/tags?pagination[page]=1&pagination[pageSize]=9999&locale=${lng}&populate=*`
     )
       .then((response) => {
+        setLoadedApi(false);
         return response.json();
       })
       .then((data) => {
+        setLoadedApi(true);
         data.data?.map((item) => {
           // const nodeLinks = linksArrayState.filter(
           //   (link) => link.source === item.id || link.target === item.id
@@ -138,13 +140,6 @@ function App() {
 
         setIsBusy(false);
 
-        // linksArrayHelper.map(obj => {
-        //   if(obj.source) {
-        //     console.log('halko')
-        //   }
-        // })
-
-        // console.log('nowe', newArray, linksArrayHelper)
       });
   }
 
@@ -152,14 +147,8 @@ function App() {
     if (lng === "ua") {
       lng = "uk";
     }
-    if (isBusy) {
-      fetchData();
-    } else {
-      // const sourcesWithMieszkanieTarget = getSourcesWithTarget(graphData.links, 'granica');
-      // const sourcesWithJedzenieTarget = getSourcesWithTarget(graphData.links, 'zakwaterowanie');
-      // console.log('tut', sourcesWithJedzenieTarget, sourcesWithMieszkanieTarget);
-    }
-  }, [lng, isBusy]);
+    fetchData();
+  }, []);
 
   if (ready) {
     return (

@@ -9,23 +9,23 @@ const getUserLanguage = () =>
 const checkLanguages = () => {
   let userLanguage = getUserLanguage();
   if (userLanguage === "pl-PL") {
-    return "pl";
-  } else if (
-    userLanguage === "en-US" ||
-    userLanguage === "en-UK" ||
-    userLanguage === "en-EN"
-  ) {
-    return "en";
+    return (userLanguage = "pl");
+  } else if (userLanguage === "en-US") {
+    return (userLanguage = "en");
+  } else if (userLanguage === "en-UK") {
+    return (userLanguage = "en");
+  } else if (userLanguage === "en-EN") {
+    return (userLanguage = "en");
   } else if (userLanguage === "ua-UA") {
-    return "ua";
-  } else if (userLanguage === "ru-RU" || userLanguage === "ru-UA") {
-    return "ru";
+    return (userLanguage = "ua");
+  } else if (userLanguage === "ru-RU") {
+    return (userLanguage = "ru");
+  } else if (userLanguage === "ru-UA") {
+    return (userLanguage = "ru");
   } else {
-    return "en";
+    return (userLanguage = "en");
   }
 };
-
-const selectedLanguage = checkLanguages();
 
 i18n
   .use(Backend)
@@ -43,6 +43,7 @@ i18n
           essay: "Essay",
           about_us: "About us",
           list_of_content: "List of contents",
+          submit_an_initiative: "Submit an initiative",
         },
       },
       pl: {
@@ -55,6 +56,7 @@ i18n
           essay: "Esej",
           about_us: "O projekcie",
           list_of_content: "Spis treści",
+          submit_an_initiative: "Submit an initiative",
         },
       },
       ua: {
@@ -67,6 +69,7 @@ i18n
           essay: "Есе",
           about_us: "Про проект",
           list_of_content: "Содержание",
+          submit_an_initiative: "Submit an initiative",
         },
       },
       ru: {
@@ -79,11 +82,13 @@ i18n
           essay: "Сочинение",
           about_us: "О проекте",
           list_of_content: "Зміст",
+          submit_an_initiative: "Submit an initiative",
         },
       },
     },
     debug: true,
-    lng: selectedLanguage,
+    // lng: checkLanguages(),
+    lng: localStorage.getItem("selectedLanguage"),
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

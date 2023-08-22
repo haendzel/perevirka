@@ -8,11 +8,13 @@ import LanguageButton from "../../components/LanguageButton/LanguageButton";
 import { StyledHeader } from "./Header.styled";
 import HeaderLink from "../../components/HeaderLink/HeaderLink";
 import { NavLink, useLocation } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const { language } = useParams();
 
   const [lang, setLang] = useState("en");
 
@@ -33,6 +35,7 @@ const Header = () => {
   const changeLanguage = (lng) => {
     localStorage.setItem("selectedLanguage", lng);
     i18n.changeLanguage(lng);
+    window.location.reload(true);
   };
 
   return (
@@ -56,6 +59,13 @@ const Header = () => {
               >
                 <HeaderLink className="header-link">{t("essay")}</HeaderLink>
               </NavLink>
+              <a
+                className="d-none d-xl-block"
+                href="https://tally.so/r/3yXA1d" target="_blank"
+                activeClassName="is-active-header-tab" rel="noreferrer"
+              >
+                <HeaderLink className="header-link">{t("submit_an_initiative")}</HeaderLink>
+              </a>
             </div>
             <button
               className="d-block d-xl-none navBarButton"
