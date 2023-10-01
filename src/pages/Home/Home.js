@@ -128,8 +128,11 @@ function Home({ newGraphData }) {
       .linkWidth((link) => (highlightLinks.has(link) ? 1 : 1))
       .linkDirectionalParticles((link) => (highlightLinks.has(link) ? 1 : 0))
       .linkDirectionalParticleWidth(0)
-      .linkColor((link) =>
-        highlightLinks.has(link) ? `#808080` : `rgba(180, 180, 180, 0.1)`
+      .linkColor(
+        (link) =>
+          highlightLinks.has(link)
+            ? `rgba(255, 53, 235, 1)`
+            : `rgba(255, 53, 235, 0.2)` //active link
       )
       // .onEngineTick(() => setGraphLoaded(true))
       .onNodeDragEnd((node) => {
@@ -152,21 +155,27 @@ function Home({ newGraphData }) {
         highlightNodes.forEach((node) => highlightArray.push(node.id));
         const sprite = new SpriteText(node.id);
         sprite.fontFace = "Inter";
-        sprite.fontWeight = "500";
-        sprite.textHeight = 7;
-        sprite.color = highlightArray.includes(node.id)
+        sprite.fontWeight = highlightArray.includes(node.id)
           ? activeNode.id === node.id
-            ? "#FE6C2D"
-            : "#fff"
-          : node.attributes.organization
-          ? "rgba(255, 251, 169, 0.33)" // Color for node with organization attribute
-          : node.attributes.city
-          ? "rgba(139, 128, 251, 0.33)" // Color for node with city attribute
-          : "rgba(224, 224, 224, 0.25)"; // Default color
+            ? "900"
+            : "600"
+          : "300";
+        sprite.textHeight = 7;
+
+        if (highlightArray.includes(node.id)) {
+          sprite.color =
+            activeNode.id === node.id
+              ? "rgba(117, 249, 114, 1)"
+              : "rgba(255, 53, 235, 1)";
+        } else {
+          sprite.color =
+            node.attributes.organization || node.attributes.city
+              ? "rgba(117, 249, 114, 0.5)"
+              : "rgba(255, 53, 235, 0.5)";
+        }
 
         return sprite;
       });
-
     function updateHighlight(node) {
       // trigger update of highlighted objects in scene
       console.log("what active node?", activeNode);

@@ -17,6 +17,7 @@
     "i18next": "^21.10.0",
     "i18next-browser-languagedetector": "^6.1.8",
     "i18next-http-backend": "^1.4.4",
+    "localtunnel": "^2.0.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
